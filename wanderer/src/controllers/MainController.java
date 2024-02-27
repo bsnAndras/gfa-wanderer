@@ -24,13 +24,18 @@ public class MainController implements KeyListener {
   public MainController(Board board) {
     area = new Area();
     this.hero = new Hero(0, 0);
-    this.boss = new Boss(2, 2);
+    this.boss = new Boss(2, 1);
     this.skeleton1 = new Skeleton(3, 3);
-    this.skeleton2 = new Skeleton(4, 3);
+    this.skeleton2 = new Skeleton(3, 8);
     this.skeleton3 = new Skeleton(5, 3);
 
     this.board = board;
     board.setHero(hero);
+    board.setBoss(boss);
+    board.setSkeleton1(skeleton1);
+    board.setSkeleton2(skeleton2);
+    board.setSkeleton3(skeleton3);
+
     board.setArea(area);
   }
 
@@ -51,22 +56,22 @@ public class MainController implements KeyListener {
     boolean heroCanMove;
     if (e.getKeyCode() == KeyEvent.VK_UP ||
         e.getKeyChar() == 'w') {
-      heroCanMove=!area.detectObstacle(hero.getX(),hero.getY()-1);
+      heroCanMove = !area.detectObstacle(hero.getX(), hero.getY() - 1);
       hero.moveUp(heroCanMove);
     }
     if (e.getKeyCode() == KeyEvent.VK_DOWN ||
         e.getKeyChar() == 's') {
-      heroCanMove=!area.detectObstacle(hero.getX(),hero.getY()+1);
+      heroCanMove = !area.detectObstacle(hero.getX(), hero.getY() + 1);
       hero.moveDown(heroCanMove);
     }
     if (e.getKeyCode() == KeyEvent.VK_LEFT ||
         e.getKeyChar() == 'a') {
-      heroCanMove=!area.detectObstacle(hero.getX()-1,hero.getY());
+      heroCanMove = !area.detectObstacle(hero.getX() - 1, hero.getY());
       hero.moveLeft(heroCanMove);
     }
     if (e.getKeyCode() == KeyEvent.VK_RIGHT ||
         e.getKeyChar() == 'd') {
-      heroCanMove=!area.detectObstacle(hero.getX()+1,hero.getY());
+      heroCanMove = !area.detectObstacle(hero.getX() + 1, hero.getY());
       hero.moveRight(heroCanMove);
     }
 
