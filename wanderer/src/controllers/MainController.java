@@ -38,18 +38,26 @@ public class MainController implements KeyListener {
 
   @Override
   public void keyReleased(KeyEvent e) {
+    boolean heroCanMove;
     if (e.getKeyCode() == KeyEvent.VK_UP ||
         e.getKeyChar() == 'w') {
-      hero.moveUp();
-    } else if (e.getKeyCode() == KeyEvent.VK_DOWN ||
+      heroCanMove=!area.detectObstacle(hero.getX(),hero.getY()-1);
+      hero.moveUp(heroCanMove);
+    }
+    if (e.getKeyCode() == KeyEvent.VK_DOWN ||
         e.getKeyChar() == 's') {
-      hero.moveDown();
-    } else if (e.getKeyCode() == KeyEvent.VK_LEFT ||
+      heroCanMove=!area.detectObstacle(hero.getX(),hero.getY()+1);
+      hero.moveDown(heroCanMove);
+    }
+    if (e.getKeyCode() == KeyEvent.VK_LEFT ||
         e.getKeyChar() == 'a') {
-      hero.moveLeft();
-    } else if (e.getKeyCode() == KeyEvent.VK_RIGHT ||
+      heroCanMove=!area.detectObstacle(hero.getX()-1,hero.getY());
+      hero.moveLeft(heroCanMove);
+    }
+    if (e.getKeyCode() == KeyEvent.VK_RIGHT ||
         e.getKeyChar() == 'd') {
-      hero.moveRight();
+      heroCanMove=!area.detectObstacle(hero.getX()+1,hero.getY());
+      hero.moveRight(heroCanMove);
     }
 
     board.repaint();

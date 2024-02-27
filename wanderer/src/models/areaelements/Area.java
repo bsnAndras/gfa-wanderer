@@ -9,56 +9,67 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Area {
-    private List<Tile[][]> tiles;
+  private List<Tile[][]> tiles;
 
-    public Area() {
-        tiles = new ArrayList<>();
-        generateTiles();
+  public Area() {
+    tiles = new ArrayList<>();
+    generateTiles();
+  }
+
+  private void generateTiles() {
+    int[][] firstTiles =
+        {
+            {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 0, 0, 0, 0, 1, 1, 1, 1},
+            {0, 1, 1, 1, 1, 0, 1, 0, 0, 0},
+            {0, 0, 0, 0, 1, 0, 1, 0, 0, 0},
+            {0, 0, 1, 0, 1, 0, 1, 0, 0, 0},
+            {0, 1, 1, 0, 1, 0, 1, 1, 0, 1},
+            {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+            {1, 1, 1, 1, 1, 0, 1, 0, 1, 0},
+            {0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
+            {0, 0, 1, 1, 1, 0, 0, 0, 1, 0}};
+
+    tiles.add(generateTileMap(firstTiles));
+
+    int[][] secondTiles =
+        {
+            {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 0, 0, 0, 0, 1, 1, 1, 1},
+            {0, 1, 1, 1, 1, 0, 1, 0, 0, 0},
+            {0, 0, 0, 0, 1, 0, 1, 0, 0, 0},
+            {0, 0, 1, 0, 1, 0, 1, 0, 0, 0},
+            {0, 1, 1, 0, 1, 0, 1, 1, 0, 1},
+            {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+            {1, 1, 1, 1, 1, 0, 1, 0, 1, 0},
+            {0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
+            {0, 0, 1, 1, 1, 0, 0, 0, 1, 0}};
+    tiles.add(generateTileMap(secondTiles));
+  }
+
+  @NotNull
+  private static Tile[][] generateTileMap(int[][] firstTiles) {
+    Tile[][] firstTileMap = new Tile[firstTiles.length][firstTiles.length];
+    for (int i = 0; i < firstTiles.length; i++) {
+      for (int j = 0; j < firstTiles[i].length; j++) {
+        firstTileMap[i][j] = firstTiles[i][j] == 0 ? new Floor() : new Wall();
+      }
     }
+    return firstTileMap;
+  }
 
-    private void generateTiles() {
-        int[][] firstTiles =
-                {
-                        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 1, 0, 0, 0, 0, 1, 1, 1, 1},
-                        {0, 1, 1, 1, 1, 0, 1, 0, 0, 0},
-                        {0, 0, 0, 0, 1, 0, 1, 0, 0, 0},
-                        {0, 0, 1, 0, 1, 0, 1, 0, 0, 0},
-                        {0, 1, 1, 0, 1, 0, 1, 1, 0, 1},
-                        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-                        {1, 1, 1, 1, 1, 0, 1, 0, 1, 0},
-                        {0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
-                        {0, 0, 1, 1, 1, 0, 0, 0, 1, 0}};
+  public Tile[][] getTiles(int index) {
+    return tiles.get(index);
+  }
 
-        tiles.add(generateTileMap(firstTiles));
-
-        int[][] secondTiles =
-                {
-                        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 1, 0, 0, 0, 0, 1, 1, 1, 1},
-                        {0, 1, 1, 1, 1, 0, 1, 0, 0, 0},
-                        {0, 0, 0, 0, 1, 0, 1, 0, 0, 0},
-                        {0, 0, 1, 0, 1, 0, 1, 0, 0, 0},
-                        {0, 1, 1, 0, 1, 0, 1, 1, 0, 1},
-                        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-                        {1, 1, 1, 1, 1, 0, 1, 0, 1, 0},
-                        {0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
-                        {0, 0, 1, 1, 1, 0, 0, 0, 1, 0}};
-        tiles.add(generateTileMap(secondTiles));
+  public boolean detectObstacle(int x, int y) {
+    if (x < 0 || x > 9 ||
+        y < 0 || y > 9) {
+      return true;
+    } else if (getTiles(1)[y][x] instanceof Wall) {
+      return true;
+    } else {
+      return false;
     }
-
-    @NotNull
-    private static Tile[][] generateTileMap(int[][] firstTiles) {
-        Tile[][] firstTileMap = new Tile[firstTiles.length][firstTiles.length];
-        for (int i = 0; i < firstTiles.length; i++) {
-            for (int j = 0; j < firstTiles[i].length; j++) {
-                firstTileMap[i][j] = firstTiles[i][j] == 0 ? new Floor() : new Wall();
-            }
-        }
-        return firstTileMap;
-    }
-
-    public Tile[][] getTiles(int index) {
-        return tiles.get(index);
-    }
+  }
 }
