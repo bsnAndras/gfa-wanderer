@@ -41,13 +41,13 @@ public class MainController implements KeyListener {
     if (e.getKeyCode() == KeyEvent.VK_UP ||
         e.getKeyChar() == 'w') {
       hero.moveUp();
-    } else if (e.getKeyCode() == KeyEvent.VK_DOWN||
+    } else if (e.getKeyCode() == KeyEvent.VK_DOWN ||
         e.getKeyChar() == 's') {
       hero.moveDown();
-    } else if (e.getKeyCode() == KeyEvent.VK_LEFT||
+    } else if (e.getKeyCode() == KeyEvent.VK_LEFT ||
         e.getKeyChar() == 'a') {
       hero.moveLeft();
-    } else if (e.getKeyCode() == KeyEvent.VK_RIGHT||
+    } else if (e.getKeyCode() == KeyEvent.VK_RIGHT ||
         e.getKeyChar() == 'd') {
       hero.moveRight();
     }
