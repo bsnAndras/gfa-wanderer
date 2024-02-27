@@ -3,6 +3,8 @@ package controllers;
 import models.Area;
 import models.Direction;
 import models.Hero;
+import models.characters.Boss;
+import models.characters.Skeleton;
 import views.Board;
 
 import java.awt.event.KeyEvent;
@@ -13,12 +15,20 @@ public class MainController implements KeyListener {
 
   private Board board;
   private Hero hero;
-
+  private Boss boss;
+  private Skeleton skeleton1;
+  private Skeleton skeleton2;
+  private Skeleton skeleton3;
   private Area area;
 
   public MainController(Board board) {
     area = new Area();
     this.hero = new Hero(0, 0);
+    this.boss = new Boss(2, 2);
+    this.skeleton1 = new Skeleton(3, 3);
+    this.skeleton2 = new Skeleton(4, 3);
+    this.skeleton3 = new Skeleton(5, 3);
+
     this.board = board;
     board.setHero(hero);
     board.setArea(area);
