@@ -1,40 +1,14 @@
 package models;
 
-public class Hero {
+import models.characters.MovingCharacter;
 
-  private int x;
-  private int y;
+public class Hero extends MovingCharacter {
 
   private Direction direction;
 
   public Hero(int x, int y) {
-    this.x = x;
-    this.y = y;
+    super(x, y);
     direction = Direction.DOWN;
-  }
-
-  public int getX() {
-    return x;
-  }
-
-  public void setX(int x) {
-    this.x = x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public void setY(int y) {
-    this.y = y;
-  }
-
-  /**
-   * Get the x-y coordinates of the Hero
-   * @return int{x,y} position
-   */
-  public int[] getPosition(){
-    return new int[] {this.x,this.y};
   }
 
   public Direction getDirection() {
@@ -51,7 +25,6 @@ public class Hero {
     }
     direction = Direction.UP;
   }
-
   public void moveDown(boolean canMove) {
     if (canMove) {
       y++;
