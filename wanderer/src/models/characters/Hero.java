@@ -29,6 +29,14 @@ public class Hero {
     this.y = y;
   }
 
+  /**
+   * Get the x-y coordinates of the Hero
+   * @return int{x,y} position
+   */
+  public int[] getPosition(){
+    return new int[] {this.x,this.y};
+  }
+
   public Direction getDirection() {
     return direction;
   }
@@ -37,29 +45,29 @@ public class Hero {
     this.direction = direction;
   }
 
-  public void moveUp() {
-    if (y > 0) {
+  public void moveUp(boolean canMove) {
+    if (canMove) {
       y--;
     }
     direction = Direction.UP;
   }
 
-  public void moveDown() {
-    if (y < 9) {
+  public void moveDown(boolean canMove) {
+    if (canMove) {
       y++;
     }
     direction = Direction.DOWN;
   }
 
-  public void moveLeft() {
-    if (x > 0) {
+  public void moveLeft(boolean canMove) {
+    if (canMove) {
       x--;
     }
     direction = Direction.LEFT;
   }
 
-  public void moveRight() {
-    if (x < 9) {
+  public void moveRight(boolean canMove) {
+    if (canMove) {
       x++;
     }
     direction = Direction.RIGHT;
