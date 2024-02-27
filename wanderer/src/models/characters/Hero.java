@@ -2,58 +2,66 @@ package models;
 
 public class Hero {
 
-    private int x;
-    private int y;
+  private int x;
+  private int y;
 
-    private Direction direction;
+  private Direction direction;
 
-    public Hero(int x, int y) {
-        this.x = x;
-        this.y = y;
-        direction = Direction.DOWN;
+  public Hero(int x, int y) {
+    this.x = x;
+    this.y = y;
+    direction = Direction.DOWN;
+  }
+
+  public int getX() {
+    return x;
+  }
+
+  public void setX(int x) {
+    this.x = x;
+  }
+
+  public int getY() {
+    return y;
+  }
+
+  public void setY(int y) {
+    this.y = y;
+  }
+
+  public Direction getDirection() {
+    return direction;
+  }
+
+  public void setDirection(Direction direction) {
+    this.direction = direction;
+  }
+
+  public void moveUp() {
+    if (y > 0) {
+      y--;
     }
+    direction = Direction.UP;
+  }
 
-    public int getX() {
-        return x;
+  public void moveDown() {
+    if (y < 9) {
+      y++;
     }
+    direction = Direction.DOWN;
+  }
 
-    public void setX(int x) {
-        this.x = x;
+  public void moveLeft() {
+    if (x > 0) {
+      x--;
     }
+    direction = Direction.LEFT;
+  }
 
-    public int getY() {
-        return y;
+  public void moveRight() {
+    if (x < 9) {
+      x++;
     }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public Direction getDirection() {
-        return direction;
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
-    }
-
-    public void moveUp() {
-        y--;
-        direction = Direction.UP;
-    }
-
-    public void moveDown() {
-        y++;
-        direction = Direction.DOWN;
-    }
-
-    public void moveLeft() {
-        x--;
-        direction = Direction.LEFT;
-    }
-
-    public void moveRight() {
-        x++;
-        direction = Direction.RIGHT;
-    }
+    direction = Direction.RIGHT;
+  }
 }
