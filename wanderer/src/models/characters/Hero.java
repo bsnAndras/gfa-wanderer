@@ -4,28 +4,30 @@ import controllers.MainController;
 import models.characters.MovingCharacter;
 
 public class Hero extends MovingCharacter {
-  private int level;
 
   private Direction direction;
 
-  public Hero(int x, int y) {
-    super(x, y);
-    level = 1;
-    maxHealth=(20 + 3 * MainController.diceRoll(6));
-    health=maxHealth;
-    dP = 2 * MainController.diceRoll(6);
-    sP = 5 + MainController.diceRoll(6);
+  public Hero(int level, int x, int y) {
+    //maxHP, sP, dP are set in the super constructor, but with this class' implementations
+    super(level, x, y);
+    health = maxHealth;
     direction = Direction.DOWN;
   }
 
-  public int getLevel() {
-    return level;
+  @Override
+  public void setMaxHealth() {
+    maxHealth = 20 + 3 * MainController.diceRoll(6);
   }
 
-  public void setLevel(int level) {
-    this.level = level;
+  @Override
+  protected void setdP() {
+    dP = 2 * MainController.diceRoll(6);
   }
 
+  @Override
+  protected void setsP() {
+    sP = 5 + MainController.diceRoll(6);
+  }
 
   public Direction getDirection() {
     return direction;
