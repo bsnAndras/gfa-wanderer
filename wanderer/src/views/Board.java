@@ -120,10 +120,13 @@ public class Board extends JComponent {
   }
 
   private void drawStatistics(Graphics graphics) {
+    String heroStats = String.format("Hero (Level %d) HP: %d/%d | DP: %d | SP: %d",
+        hero.getLevel(),hero.getHealth(),hero.getMaxHealth(),hero.getdP(),hero.getsP());
+    System.out.println(heroStats);
     graphics.setColor(Color.BLACK);
     graphics.fillRect(0, 720, 720, 40);
     graphics.setColor(Color.WHITE);
     graphics.setFont(new Font("Arial", Font.BOLD, 16));
-    graphics.drawString("HP: 250", 20, 740);
+    graphics.drawString(heroStats, 20, 740);
   }
 }
