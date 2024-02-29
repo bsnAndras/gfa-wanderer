@@ -52,6 +52,10 @@ public class Board extends JComponent {
     this.area = area;
   }
 
+  /**<p>Draws the board then the Hero, then the Enemies, and then the Statistics</p>
+   *
+   * @param graphics  the <code>Graphics</code> context in which to paint
+   */
   @Override
   public void paint(Graphics graphics) {
     super.paint(graphics);
@@ -62,6 +66,13 @@ public class Board extends JComponent {
     drawStatistics(graphics);
   }
 
+  /**
+   * <p>Draws the Tiles based on the map set up in the Area class</p>
+   * <p>This method iterates through the whole Area and loads the image for every Tile
+   * based upon its Class type (Floor or Wall)</p>
+   *
+   * @param graphics
+   */
   private void drawTiles(Graphics graphics) {
     Tile[][] tiles = area.getTiles(1);
     for (int i = 0; i < tiles.length; i++) {
@@ -80,6 +91,11 @@ public class Board extends JComponent {
     }
   }
 
+  /**
+   * <p>Draws the hero on the board</p>
+   * <p>The image related to every direction is loaded here</p>
+   * @param graphics
+   */
   private void drawHero(Graphics graphics) {
     String heroImagePath = "";
     if (hero.getDirection() == Direction.UP) {
@@ -97,14 +113,22 @@ public class Board extends JComponent {
     heroImage.draw(graphics);
   }
 
+  /**
+   * <p>Draws enemies on the board using the coordinates stored in the enemy classes</p>
+   * <p>The pictures of the enemies are loaded here</p>
+   * @param graphics
+   */
   private void drawEnemy(Graphics graphics) {
     String bossImagePath = "img/boss.png";
     String skeletonImagePath = "img/skeleton.png";
 
+    //drawing boss
     PositionedImage enemyImage = new PositionedImage(bossImagePath,
             boss.getX() * tileSize,
             boss.getY() * tileSize);
     enemyImage.draw(graphics);
+
+    //drawing other enemies
     enemyImage = new PositionedImage(skeletonImagePath,
         skeleton1.getX() * tileSize,
         skeleton1.getY() * tileSize);
@@ -122,7 +146,7 @@ public class Board extends JComponent {
   private void drawStatistics(Graphics graphics) {
     String heroStats = String.format("Hero (Level %d) HP: %d/%d | DP: %d | SP: %d",
         hero.getLevel(),hero.getHealth(),hero.getMaxHealth(),hero.getdP(),hero.getsP());
-    System.out.println(heroStats);
+    //System.out.println(heroStats);
     graphics.setColor(Color.BLACK);
     graphics.fillRect(0, 720, 720, 40);
     graphics.setColor(Color.WHITE);
