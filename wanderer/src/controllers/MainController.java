@@ -1,7 +1,7 @@
 package controllers;
 
+import java.util.Random;
 import models.Area;
-import models.Direction;
 import models.Hero;
 import models.characters.Boss;
 import models.characters.Skeleton;
@@ -9,7 +9,6 @@ import views.Board;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.AreaAveragingScaleFilter;
 
 public class MainController implements KeyListener {
 
@@ -20,6 +19,7 @@ public class MainController implements KeyListener {
   private Skeleton skeleton2;
   private Skeleton skeleton3;
   private Area area;
+  public static Random dice = new Random();
 
   public MainController(Board board) {
     area = new Area();
@@ -38,7 +38,9 @@ public class MainController implements KeyListener {
 
     board.setArea(area);
   }
-
+public static int diceRoll(int diceSide){
+    return dice.nextInt(1,diceSide+1);
+}
 
   @Override
   public void keyTyped(KeyEvent e) {
