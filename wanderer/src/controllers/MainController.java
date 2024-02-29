@@ -23,11 +23,11 @@ public class MainController implements KeyListener {
 
   public MainController(Board board) {
     area = new Area();
-    this.hero = new Hero(0, 0);
-    this.boss = new Boss(2, 1);
-    this.skeleton1 = new Skeleton(3, 3);
-    this.skeleton2 = new Skeleton(3, 8);
-    this.skeleton3 = new Skeleton(5, 3);
+    this.hero = new Hero(1, 0, 0);
+    this.boss = new Boss(hero.getLevel(), 2, 1);
+    this.skeleton1 = new Skeleton(hero.getLevel(), 3, 3);
+    this.skeleton2 = new Skeleton(hero.getLevel(), 3, 8);
+    this.skeleton3 = new Skeleton(hero.getLevel(), 5, 3);
 
     this.board = board;
     board.setHero(hero);
@@ -38,9 +38,16 @@ public class MainController implements KeyListener {
 
     board.setArea(area);
   }
-public static int diceRoll(int diceSide){
-    return dice.nextInt(1,diceSide+1);
-}
+
+  /**
+   * <p>Simulates a dice roll with a given sided dice</p>
+   *
+   * @param diceSide the number of sides
+   * @return the result of the roll
+   */
+  public static int diceRoll(int diceSide) {
+    return dice.nextInt(1, diceSide + 1);
+  }
 
   @Override
   public void keyTyped(KeyEvent e) {
