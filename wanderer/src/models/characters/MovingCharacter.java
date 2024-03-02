@@ -116,6 +116,8 @@ public abstract class MovingCharacter {
       }
       if (obstacle == 0) {
         y--;
+        fromTile.leave();
+        toTile.occupy(this);
       } else {
         if (obstacle < 0) {
           isUnderBattle = true;
@@ -138,6 +140,8 @@ public abstract class MovingCharacter {
       }
       if (obstacle == 0) {
         y++;
+        fromTile.leave();
+        toTile.occupy(this);
       } else {
         if (obstacle < 0) {
           isUnderBattle = true;
@@ -160,6 +164,8 @@ public abstract class MovingCharacter {
       }
       if (obstacle == 0) {
         x--;
+        fromTile.leave();
+        toTile.occupy(this);
       } else {
         if (obstacle < 0) {
           isUnderBattle = true;
@@ -182,6 +188,8 @@ public abstract class MovingCharacter {
       }
       if (obstacle == 0) {
         x++;
+        fromTile.leave();
+        toTile.occupy(this);
       } else {
         if (obstacle < 0) {
           isUnderBattle = true;
