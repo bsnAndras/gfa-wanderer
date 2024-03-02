@@ -70,9 +70,10 @@ public class MainController implements KeyListener {
     if (hero.isUnderBattle) {
       board.setDefender(battle.defender);
       board.setOpponent((Enemy) (battle.defender == hero ? battle.attacker : battle.defender));
-    }
-    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-
+      if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+        battle.fight();
+      }
+      board.repaint();
     } else {
       if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyChar() == 'w') {
 
@@ -119,7 +120,7 @@ public class MainController implements KeyListener {
         battle = MonstersMovingEvent.monstersMoving(area.getTiles(areaLevel), enemies);
         movementCounter = 0;
       }
+      board.repaint();
     }
-    board.repaint();
   }
 }

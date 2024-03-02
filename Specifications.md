@@ -36,7 +36,7 @@ the monsters holding the keys to the next level.
 
 - 🟩Every character has a (max and current) health point (HP), a defend (DP) and
   strike point (SP).
-- 🟥These values can change during the game.
+- 🟩These values can change during the game.
 - 🟥When a character's health point is 0 or below, it is dead.
   - 🟥It disappears from the area.
   - 🟥If its the hero, it is the end of the game.
@@ -70,10 +70,10 @@ the monsters holding the keys to the next level.
 
 #### Strike
 
-- 🟥On a strike a strike value (SV) is calculated from SP and a d6 doubled.
-- 🟥The strike is successful if 2 \* d6 + SP is higher than the other character's
+- 🟩On a strike a strike value (SV) is calculated from SP and a d6 doubled.
+- 🟩The strike is successful if 2 \* d6 + SP is higher than the other character's
   DP.
-- 🟥On a successful strike the other character's HP is decreased by the SV - the
+- 🟩On a successful strike the other character's HP is decreased by the SV - the
   other character's DP.
 
 #### Leveling
