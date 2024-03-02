@@ -1,6 +1,7 @@
 package models;
 
 import controllers.MainController;
+import events.Battle;
 import models.areaelements.Tile;
 import models.characters.MovingCharacter;
 
@@ -38,23 +39,27 @@ public class Hero extends MovingCharacter {
     this.direction = direction;
   }
 
-  public void moveUp(Tile fromTile, Tile toTile) {
+  public Battle moveUp(Tile fromTile, Tile toTile) {
     direction = Direction.UP;
     super.moveUp(fromTile,toTile);
+    return null;
   }
 
-  public void moveDown(Tile fromTile, Tile toTile) {
+  public Battle moveDown(Tile fromTile, Tile toTile) {
     direction = Direction.DOWN;
     super.moveDown(fromTile,toTile);
+    return null;
   }
 
-  public void moveLeft(Tile fromTile, Tile toTile) {
+  public Battle moveLeft(Tile fromTile, Tile toTile) {
     direction = Direction.LEFT;
     super.moveLeft(fromTile,toTile);
+    return null;
   }
 
-  public void moveRight(Tile fromTile, Tile toTile) {
+  public Battle moveRight(Tile fromTile, Tile toTile) {
     direction = Direction.RIGHT;
     super.moveRight(fromTile,toTile);
+    return null;
   }
 }

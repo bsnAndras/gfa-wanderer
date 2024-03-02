@@ -105,8 +105,9 @@ public abstract class MovingCharacter {
 
   /**
    * Move the character 1 tile upwards, if it can
+   * @return a Battle, if a battle began after the move
    */
-  public void moveUp(Tile fromTile, Tile toTile) {
+  public Battle moveUp(Tile fromTile, Tile toTile) {
     int obstacle;
     if (!isUnderBattle) {
       if (fromTile == toTile) {
@@ -122,15 +123,19 @@ public abstract class MovingCharacter {
         if (obstacle < 0) {
           isUnderBattle = true;
           Battle battle = new Battle(this, toTile.getCharacter());
+          return battle;
         }
       }
     }
+    return null;
   }
 
   /**
    * Move the character 1 tile downwards, if it can
+   *
+   * @return a Battle, if a battle began after the move
    */
-  public void moveDown(Tile fromTile, Tile toTile) {
+  public Battle moveDown(Tile fromTile, Tile toTile) {
     int obstacle;
     if (!isUnderBattle) {
       if (fromTile == toTile) {
@@ -146,15 +151,19 @@ public abstract class MovingCharacter {
         if (obstacle < 0) {
           isUnderBattle = true;
           Battle battle = new Battle(this, toTile.getCharacter());
+          return battle;
         }
       }
     }
+    return null;
   }
 
   /**
    * Move the character 1 tile left, if it can
+   *
+   * @return a Battle, if a battle began after the move
    */
-  public void moveLeft(Tile fromTile, Tile toTile) {
+  public Battle moveLeft(Tile fromTile, Tile toTile) {
     int obstacle;
     if (!isUnderBattle) {
       if (fromTile == toTile) {
@@ -170,15 +179,19 @@ public abstract class MovingCharacter {
         if (obstacle < 0) {
           isUnderBattle = true;
           Battle battle = new Battle(this, toTile.getCharacter());
+          return battle;
         }
       }
     }
+    return null;
   }
 
   /**
    * Move the character 1 tile right, if it can
+   *
+   * @return a Battle, if a battle began after the move
    */
-  public void moveRight(Tile fromTile, Tile toTile) {
+  public Battle moveRight(Tile fromTile, Tile toTile) {
     int obstacle;
     if (!isUnderBattle) {
       if (fromTile == toTile) {
@@ -194,9 +207,11 @@ public abstract class MovingCharacter {
         if (obstacle < 0) {
           isUnderBattle = true;
           Battle battle = new Battle(this, toTile.getCharacter());
+          return battle;
         }
       }
     }
+    return null;
   }
 
   /**

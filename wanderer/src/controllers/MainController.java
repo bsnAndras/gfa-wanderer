@@ -1,5 +1,6 @@
 package controllers;
 
+import events.Battle;
 import events.MonstersMovingEvent;
 import java.util.ArrayList;
 import java.util.Random;
@@ -21,6 +22,7 @@ public class MainController implements KeyListener {
   private Area area;
   public static Random dice = new Random();
   int movementCounter = 0;
+  Battle battle;
 
   public MainController(Board board) {
     //sets up every map layout with Tiles
@@ -56,9 +58,7 @@ public class MainController implements KeyListener {
 
   @Override
   public void keyPressed(KeyEvent e) {
-    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-      System.out.println("SPACE");
-    }
+
   }
 
 
@@ -67,50 +67,57 @@ public class MainController implements KeyListener {
     Tile fromTile = area.getTiles(areaLevel)[hero.getY()][hero.getX()];
     Tile toTile;
 
-    if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyChar() == 'w') {
+    if (hero.isUnderBattle) {
 
-      try {
-        toTile = area.getTiles(areaLevel)[hero.getY() - 1][hero.getX()];
-      } catch (IndexOutOfBoundsException ex) {
-        toTile = fromTile;
+      if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+
       }
-      hero.moveUp(fromTile, toTile);
+    } else {
+      if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyChar() == 'w') {
 
-    } else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyChar() == 's') {
+        try {
+          toTile = area.getTiles(areaLevel)[hero.getY() - 1][hero.getX()];
+        } catch (IndexOutOfBoundsException ex) {
+          toTile = fromTile;
+        }
+        battle = hero.moveUp(fromTile, toTile);
 
-      try {
-        toTile = area.getTiles(areaLevel)[hero.getY() + 1][hero.getX()];
-      } catch (IndexOutOfBoundsException ex) {
-        toTile = fromTile;
+      } else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyChar() == 's') {
+
+        try {
+          toTile = area.getTiles(areaLevel)[hero.getY() + 1][hero.getX()];
+        } catch (IndexOutOfBoundsException ex) {
+          toTile = fromTile;
+        }
+
+        battle = hero.moveDown(fromTile, toTile);
+
+      } else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyChar() == 'a') {
+
+        try {
+          toTile = area.getTiles(areaLevel)[hero.getY()][hero.getX() - 1];
+        } catch (IndexOutOfBoundsException ex) {
+          toTile = fromTile;
+        }
+
+        battle = hero.moveLeft(fromTile, toTile);
+
+      } else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyChar() == 'd') {
+
+        try {
+          toTile = area.getTiles(areaLevel)[hero.getY()][hero.getX() + 1];
+        } catch (IndexOutOfBoundsException ex) {
+          toTile = fromTile;
+        }
+
+        battle = hero.moveRight(fromTile, toTile);
       }
 
-      hero.moveDown(fromTile, toTile);
-
-    } else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyChar() == 'a') {
-
-      try {
-        toTile = area.getTiles(areaLevel)[hero.getY()][hero.getX() - 1];
-      } catch (IndexOutOfBoundsException ex) {
-        toTile = fromTile;
+      movementCounter++;
+      if (movementCounter > 1) {
+        MonstersMovingEvent.monstersMoving(area.getTiles(areaLevel), enemies);
+        movementCounter = 0;
       }
-
-      hero.moveLeft(fromTile, toTile);
-
-    } else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyChar() == 'd') {
-
-      try {
-        toTile = area.getTiles(areaLevel)[hero.getY()][hero.getX() + 1];
-      } catch (IndexOutOfBoundsException ex) {
-        toTile = fromTile;
-      }
-
-      hero.moveRight(fromTile, toTile);
-    }
-
-    movementCounter++;
-    if (movementCounter > 1) {
-      MonstersMovingEvent.monstersMoving(area.getTiles(areaLevel), enemies);
-      movementCounter = 0;
     }
     board.repaint();
   }
