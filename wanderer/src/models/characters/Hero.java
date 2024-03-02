@@ -1,6 +1,7 @@
 package models;
 
 import controllers.MainController;
+import models.areaelements.Tile;
 import models.characters.MovingCharacter;
 
 public class Hero extends MovingCharacter {
@@ -37,31 +38,23 @@ public class Hero extends MovingCharacter {
     this.direction = direction;
   }
 
-  public void moveUp(boolean canMove) {
-    if (canMove) {
-      y--;
-    }
+  public void moveUp(Tile fromTile, Tile toTile) {
     direction = Direction.UP;
+    super.moveUp(fromTile,toTile);
   }
 
-  public void moveDown(boolean canMove) {
-    if (canMove) {
-      y++;
-    }
+  public void moveDown(Tile fromTile, Tile toTile) {
     direction = Direction.DOWN;
+    super.moveDown(fromTile,toTile);
   }
 
-  public void moveLeft(boolean canMove) {
-    if (canMove) {
-      x--;
-    }
+  public void moveLeft(Tile fromTile, Tile toTile) {
     direction = Direction.LEFT;
+    super.moveLeft(fromTile,toTile);
   }
 
-  public void moveRight(boolean canMove) {
-    if (canMove) {
-      x++;
-    }
+  public void moveRight(Tile fromTile, Tile toTile) {
     direction = Direction.RIGHT;
+    super.moveRight(fromTile,toTile);
   }
 }

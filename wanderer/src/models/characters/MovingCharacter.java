@@ -19,12 +19,14 @@ public abstract class MovingCharacter {
   protected int x;
   protected int y;
   public boolean canMove;
+  public boolean isUnderBattle;
 
   public MovingCharacter(int level, int x, int y) {
     this.level = level;
     this.x = x;
     this.y = y;
     canMove = true;
+    isUnderBattle = false;
     setMaxHealth();
     setdP();
     setsP();
@@ -106,20 +108,20 @@ public abstract class MovingCharacter {
    */
   public void moveUp(Tile fromTile, Tile toTile) {
     int obstacle;
-    if (fromTile == toTile) {
-      obstacle = 1;
-    } else {
-      obstacle = detectObstacle(toTile);
-    }
-    if (obstacle != 0) {
-      canMove = false;
-      if (obstacle < 0) {
-        Battle battle = new Battle(this, toTile.getCharacter());
+    if (!isUnderBattle) {
+      if (fromTile == toTile) {
+        obstacle = 1;
+      } else {
+        obstacle = detectObstacle(toTile);
       }
-    }
-
-    if (canMove) {
-      y--;
+      if (obstacle == 0) {
+        y--;
+      } else {
+        if (obstacle < 0) {
+          isUnderBattle = true;
+          Battle battle = new Battle(this, toTile.getCharacter());
+        }
+      }
     }
   }
 
@@ -128,20 +130,20 @@ public abstract class MovingCharacter {
    */
   public void moveDown(Tile fromTile, Tile toTile) {
     int obstacle;
-    if (fromTile == toTile) {
-      obstacle = 1;
-    } else {
-      obstacle = detectObstacle(toTile);
-    }
-    if (obstacle != 0) {
-      canMove = false;
-      if (obstacle < 0) {
-        Battle battle = new Battle(this, toTile.getCharacter());
+    if (!isUnderBattle) {
+      if (fromTile == toTile) {
+        obstacle = 1;
+      } else {
+        obstacle = detectObstacle(toTile);
       }
-    }
-
-    if (canMove) {
-      y++;
+      if (obstacle == 0) {
+        y++;
+      } else {
+        if (obstacle < 0) {
+          isUnderBattle = true;
+          Battle battle = new Battle(this, toTile.getCharacter());
+        }
+      }
     }
   }
 
@@ -150,20 +152,20 @@ public abstract class MovingCharacter {
    */
   public void moveLeft(Tile fromTile, Tile toTile) {
     int obstacle;
-    if (fromTile == toTile) {
-      obstacle = 1;
-    } else {
-      obstacle = detectObstacle(toTile);
-    }
-    if (obstacle != 0) {
-      canMove = false;
-      if (obstacle < 0) {
-        Battle battle = new Battle(this, toTile.getCharacter());
+    if (!isUnderBattle) {
+      if (fromTile == toTile) {
+        obstacle = 1;
+      } else {
+        obstacle = detectObstacle(toTile);
       }
-    }
-
-    if (canMove) {
-      x--;
+      if (obstacle == 0) {
+        x--;
+      } else {
+        if (obstacle < 0) {
+          isUnderBattle = true;
+          Battle battle = new Battle(this, toTile.getCharacter());
+        }
+      }
     }
   }
 
@@ -172,20 +174,20 @@ public abstract class MovingCharacter {
    */
   public void moveRight(Tile fromTile, Tile toTile) {
     int obstacle;
-    if (fromTile == toTile) {
-      obstacle = 1;
-    } else {
-      obstacle = detectObstacle(toTile);
-    }
-    if (obstacle != 0) {
-      canMove = false;
-      if (obstacle < 0) {
-        Battle battle = new Battle(this, toTile.getCharacter());
+    if (!isUnderBattle) {
+      if (fromTile == toTile) {
+        obstacle = 1;
+      } else {
+        obstacle = detectObstacle(toTile);
       }
-    }
-
-    if (canMove) {
-      x++;
+      if (obstacle == 0) {
+        x++;
+      } else {
+        if (obstacle < 0) {
+          isUnderBattle = true;
+          Battle battle = new Battle(this, toTile.getCharacter());
+        }
+      }
     }
   }
 
