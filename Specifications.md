@@ -20,7 +20,7 @@ the monsters holding the keys to the next level.
 - 🟩One of the monsters is the boss.
 - 🟥One of the monsters (not the boss) is holding the key, so if it is killed the
   hero goes to the next area, but also the boss has to be killed.
-- 🟥The game screen also contains a text area where info of the characters' are
+- 🟩The game screen also contains a text area where info of the characters' are
   provided.
   - 🟩It shows all stats of the hero.
   - 🟥If the hero is on the same tile with a monster, it shows all stats of the
@@ -61,7 +61,7 @@ the monsters holding the keys to the next level.
 #### Battle
 
 - 🟩When a hero enters a tile which is occupied by a monster, a battle forms.
-- 🟥The character entering the occupied tile is the attacker.
+- 🟩The character entering the occupied tile is the attacker.
 - 🟥When the player hits `space` his hero strikes on the defender and then it
   strikes back.
 - 🟥The attacker strikes on the defender, then the defender strikes and this

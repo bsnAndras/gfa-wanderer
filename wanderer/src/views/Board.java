@@ -11,10 +11,13 @@ import javax.swing.*;
 import java.awt.*;
 import models.characters.Boss;
 import models.characters.Enemy;
+import models.characters.MovingCharacter;
 
 public class Board extends JComponent {
 
   private Hero hero;
+  private Enemy opponent;
+  private MovingCharacter defender;
   private List<Enemy> enemies;
   private Area area;
 
@@ -32,6 +35,14 @@ public class Board extends JComponent {
 
   public void setEnemies(List<Enemy> enemies) {
     this.enemies = enemies;
+  }
+
+  public void setOpponent(Enemy opponent) {
+    this.opponent = opponent;
+  }
+
+  public void setDefender(MovingCharacter defender) {
+    this.defender = defender;
   }
 
   public void setArea(Area area) {
@@ -65,6 +76,10 @@ public class Board extends JComponent {
     for (int i = 0; i < tiles.length; i++) {
       for (int j = 0; j < tiles[0].length; j++) {
         String image = tiles[j][i] instanceof Floor ? "img/floor.png" : "img/wall.png";
+        if (tiles[j][i].getCharacter() != null && tiles[j][i].getCharacter() == defender) {
+          image = "img/floor_red.png";
+        }
+
                 /*
                 Ternary operator (condition ? doIfTrue : else)  is the same as:
                 if (tiles[j][i] instanceof Floor) {
@@ -127,7 +142,10 @@ public class Board extends JComponent {
   private void drawStatistics(Graphics graphics) {
     String heroStats = String.format("Hero (Level %d) HP: %d/%d | DP: %d | SP: %d",
         hero.getLevel(), hero.getHealth(), hero.getMaxHealth(), hero.getdP(), hero.getsP());
-    //System.out.println(heroStats);
+
+    //String opponentStats = String.format("%s (Level %d) HP: %d/%d | DP: %d | SP: %d",
+    //enemy.getLevel(), hero.getHealth(), hero.getMaxHealth(), hero.getdP(), hero.getsP());
+
     graphics.setColor(Color.BLACK);
     graphics.fillRect(0, 720, 720, 40);
     graphics.setColor(Color.WHITE);

@@ -1,22 +1,21 @@
 package events;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import models.characters.MovingCharacter;
 
 public class Battle {
-  MovingCharacter attacker;
-  MovingCharacter defender;
+  public MovingCharacter attacker;
+  public MovingCharacter defender;
 
   public Battle(MovingCharacter attacker, MovingCharacter defender) {
     this.attacker = attacker;
     this.defender = defender;
+    defender.isUnderBattle = true;
 
-    battle();
   }
 
   private boolean battle() {
-    System.out.println("Battle happens");
+
     return false;
   }
+
 }

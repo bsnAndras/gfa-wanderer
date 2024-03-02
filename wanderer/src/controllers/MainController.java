@@ -68,7 +68,7 @@ public class MainController implements KeyListener {
     Tile toTile;
 
     if (hero.isUnderBattle) {
-
+      board.setDefender(battle.defender);
       if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 
       }
@@ -115,7 +115,7 @@ public class MainController implements KeyListener {
 
       movementCounter++;
       if (movementCounter > 1) {
-        MonstersMovingEvent.monstersMoving(area.getTiles(areaLevel), enemies);
+        battle = MonstersMovingEvent.monstersMoving(area.getTiles(areaLevel), enemies);
         movementCounter = 0;
       }
     }

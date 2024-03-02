@@ -41,25 +41,21 @@ public class Hero extends MovingCharacter {
 
   public Battle moveUp(Tile fromTile, Tile toTile) {
     direction = Direction.UP;
-    super.moveUp(fromTile,toTile);
-    return null;
+    return super.moveUp(fromTile,toTile);
   }
 
   public Battle moveDown(Tile fromTile, Tile toTile) {
     direction = Direction.DOWN;
-    super.moveDown(fromTile,toTile);
-    return null;
+    return super.moveDown(fromTile,toTile);
   }
 
   public Battle moveLeft(Tile fromTile, Tile toTile) {
     direction = Direction.LEFT;
-    super.moveLeft(fromTile,toTile);
-    return null;
+    return super.moveLeft(fromTile,toTile);
   }
 
   public Battle moveRight(Tile fromTile, Tile toTile) {
     direction = Direction.RIGHT;
-    super.moveRight(fromTile,toTile);
-    return null;
+    return super.moveRight(fromTile,toTile);
   }
 }

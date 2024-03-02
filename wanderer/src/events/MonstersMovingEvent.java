@@ -1,7 +1,6 @@
 package events;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import models.areaelements.Tile;
 import models.characters.Enemy;
@@ -11,15 +10,19 @@ public class MonstersMovingEvent {
   public MonstersMovingEvent() {
   }
 
-  public static void monstersMoving(Tile[][] tiles,
-                                    ArrayList<Enemy> movingEnemies) {
+  public static Battle monstersMoving(Tile[][] tiles,
+                                      ArrayList<Enemy> movingEnemies) {
+    Battle battle;
     for (MovingCharacter enemy : movingEnemies) {
-
-      moveRandomly(enemy, tiles);
+      battle = moveRandomly(enemy, tiles);
+      if (battle != null) {
+        return battle;
+      }
     }
+    return null;
   }
 
-  public static void moveRandomly(MovingCharacter enemy, Tile[][] tileMap) {
+  public static Battle moveRandomly(MovingCharacter enemy, Tile[][] tileMap) {
     Random random = new Random();
     Tile fromTile = tileMap[enemy.getY()][enemy.getX()];
     Tile toTile;
@@ -33,8 +36,7 @@ public class MonstersMovingEvent {
           } catch (IndexOutOfBoundsException e) {
             continue;
           }
-          enemy.moveUp(fromTile, toTile);
-          return;
+          return enemy.moveUp(fromTile, toTile);
         }
         case 1 -> {
           try {
@@ -42,8 +44,7 @@ public class MonstersMovingEvent {
           } catch (IndexOutOfBoundsException e) {
             continue;
           }
-          enemy.moveDown(fromTile, toTile);
-          return;
+          return enemy.moveDown(fromTile, toTile);
         }
         case 2 -> {
           try {
@@ -51,8 +52,7 @@ public class MonstersMovingEvent {
           } catch (IndexOutOfBoundsException e) {
             continue;
           }
-          enemy.moveLeft(fromTile, toTile);
-          return;
+          return enemy.moveLeft(fromTile, toTile);
         }
         case 3 -> {
           try {
@@ -60,8 +60,7 @@ public class MonstersMovingEvent {
           } catch (IndexOutOfBoundsException e) {
             continue;
           }
-          enemy.moveRight(fromTile, toTile);
-          return;
+          return enemy.moveRight(fromTile, toTile);
         }
       }
     }
