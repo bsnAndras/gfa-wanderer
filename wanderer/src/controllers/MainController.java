@@ -28,7 +28,7 @@ public class MainController implements KeyListener {
     //sets up the Hero
     this.hero = new Hero(1, 0, 0);
     this.areaLevel = 1;
-    area.getTiles(areaLevel)[0][0].occupy();
+    area.getTiles(areaLevel)[0][0].occupy(hero);
     //sets up a random number of monsters based on hero's level
     this.enemies = area.createEnemies(areaLevel);
     //loads the board and give it the hero, the monsters
@@ -56,7 +56,9 @@ public class MainController implements KeyListener {
 
   @Override
   public void keyPressed(KeyEvent e) {
-
+    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+      System.out.println("SPACE");
+    }
   }
 
 
@@ -69,58 +71,58 @@ public class MainController implements KeyListener {
     if (e.getKeyCode() == KeyEvent.VK_UP ||
         e.getKeyChar() == 'w') {
       obstacle = area.detectObstacle(hero.getX(), hero.getY() - 1);
-      if (obstacle < 1) {
+      if (obstacle == 0) {
         heroCanMove = true;
-        if (obstacle < 0) {
-          Battle battle = new Battle();
-        }
       } else {
         heroCanMove = false;
+        if (obstacle < 0) {
+          Battle battle = new Battle(hero, enemies.get(0));
+        }
       }
       hero.moveUp(heroCanMove);
     }
     if (e.getKeyCode() == KeyEvent.VK_DOWN ||
         e.getKeyChar() == 's') {
       obstacle = area.detectObstacle(hero.getX(), hero.getY() + 1);
-      if (obstacle < 1) {
+      if (obstacle == 0) {
         heroCanMove = true;
-        if (obstacle < 0) {
-          Battle battle = new Battle();
-        }
       } else {
         heroCanMove = false;
+        if (obstacle < 0) {
+          Battle battle = new Battle(hero, enemies.get(0));
+        }
       }
       hero.moveDown(heroCanMove);
     }
     if (e.getKeyCode() == KeyEvent.VK_LEFT ||
         e.getKeyChar() == 'a') {
       obstacle = area.detectObstacle(hero.getX() - 1, hero.getY());
-      if (obstacle < 1) {
+      if (obstacle == 0) {
         heroCanMove = true;
-        if (obstacle < 0) {
-          Battle battle = new Battle();
-        }
       } else {
         heroCanMove = false;
+        if (obstacle < 0) {
+          Battle battle = new Battle(hero, enemies.get(0));
+        }
       }
       hero.moveLeft(heroCanMove);
     }
     if (e.getKeyCode() == KeyEvent.VK_RIGHT ||
         e.getKeyChar() == 'd') {
       obstacle = area.detectObstacle(hero.getX() + 1, hero.getY());
-      if (obstacle < 1) {
+      if (obstacle == 0) {
         heroCanMove = true;
-        if (obstacle < 0) {
-          Battle battle = new Battle();
-        }
       } else {
         heroCanMove = false;
+        if (obstacle < 0) {
+          Battle battle = new Battle(hero, enemies.get(0));
+        }
       }
       hero.moveRight(heroCanMove);
     }
     movementCounter++;
     if (movementCounter > 1) {
-      MonstersMovingEvent mME = new MonstersMovingEvent(area.getTiles(areaLevel), enemies);
+      //MonstersMovingEvent mME = new MonstersMovingEvent(area.getTiles(areaLevel), enemies);
       movementCounter = 0;
     }
     board.repaint();

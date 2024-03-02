@@ -81,7 +81,7 @@ public class Area {
         || getTiles(areaLevel)[boss.getY()][boss.getX()] instanceof Wall);
     enemies.add(boss);
     //set the Tile occupied
-    getTiles(areaLevel)[boss.getY()][boss.getX()].occupy();
+    getTiles(areaLevel)[boss.getY()][boss.getX()].occupy(boss);
 
     for (int i = 1; i < enemyCount; i++) {
       do { //place enemies somewhere on the board
@@ -90,7 +90,7 @@ public class Area {
           || getTiles(areaLevel)[enemy.getY()][enemy.getX()] instanceof Wall);
       enemies.add(enemy);
       //set the Tile occupied
-      getTiles(areaLevel)[enemy.getY()][enemy.getX()].occupy();
+      getTiles(areaLevel)[enemy.getY()][enemy.getX()].occupy(enemy);
     }
     return enemies;
   }
