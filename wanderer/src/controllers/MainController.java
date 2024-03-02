@@ -1,9 +1,9 @@
 package controllers;
 
+import java.util.List;
 import java.util.Random;
 import models.Area;
 import models.Hero;
-import models.characters.Boss;
 import models.characters.Enemy;
 import views.Board;
 
@@ -14,28 +14,22 @@ public class MainController implements KeyListener {
 
   private Board board;
   private Hero hero;
-  private Boss boss;
-  private Enemy skeleton1;
-  private Enemy skeleton2;
-  private Enemy skeleton3;
+  private List<Enemy> enemies;
   private Area area;
   public static Random dice = new Random();
 
   public MainController(Board board) {
+    //sets up every maps layout with Tiles
     area = new Area();
+    //sets up the Hero
     this.hero = new Hero(1, 0, 0);
-    this.boss = new Boss(hero.getLevel(), 2, 1);
-    this.skeleton1 = new Enemy(hero.getLevel(), 3, 3);
-    this.skeleton2 = new Enemy(hero.getLevel(), 3, 8);
-    this.skeleton3 = new Enemy(hero.getLevel(), 5, 3);
-
+    //sets up a random number of monsters based on hero's level
+    this.enemies = area.createEnemies(hero.getLevel());
+    //loads the board and give it the hero, the monsters
+    // and the tiles(area) to draw
     this.board = board;
     board.setHero(hero);
-    board.setBoss(boss);
-    board.setSkeleton1(skeleton1);
-    board.setSkeleton2(skeleton2);
-    board.setSkeleton3(skeleton3);
-
+    board.setEnemies(enemies);
     board.setArea(area);
   }
 

@@ -1,5 +1,6 @@
 package views;
 
+import java.util.List;
 import models.Area;
 import models.Direction;
 import models.Hero;
@@ -8,17 +9,13 @@ import models.areaelements.Tile;
 
 import javax.swing.*;
 import java.awt.*;
-import models.characters.Boss;
 import models.characters.Enemy;
 
 public class Board extends JComponent {
 
   private Hero hero;
-  private Boss boss;
+  private List<Enemy> enemies;
   private Area area;
-  private Enemy skeleton1;
-  private Enemy skeleton2;
-  private Enemy skeleton3;
 
   private final int tileSize;
 
@@ -32,29 +29,18 @@ public class Board extends JComponent {
     this.hero = hero;
   }
 
-  public void setBoss(Boss boss) {
-    this.boss = boss;
-  }
-
-  public void setSkeleton1(Enemy skeleton1) {
-    this.skeleton1 = skeleton1;
-  }
-
-  public void setSkeleton2(Enemy skeleton2) {
-    this.skeleton2 = skeleton2;
-  }
-
-  public void setSkeleton3(Enemy skeleton3) {
-    this.skeleton3 = skeleton3;
+  public void setEnemies(List<Enemy> enemies) {
+    this.enemies = enemies;
   }
 
   public void setArea(Area area) {
     this.area = area;
   }
 
-  /**<p>Draws the board then the Hero, then the Enemies, and then the Statistics</p>
+  /**
+   * <p>Draws the board then the Hero, then the Enemies, and then the Statistics</p>
    *
-   * @param graphics  the <code>Graphics</code> context in which to paint
+   * @param graphics the <code>Graphics</code> context in which to paint
    */
   @Override
   public void paint(Graphics graphics) {
@@ -94,6 +80,7 @@ public class Board extends JComponent {
   /**
    * <p>Draws the hero on the board</p>
    * <p>The image related to every direction is loaded here</p>
+   *
    * @param graphics
    */
   private void drawHero(Graphics graphics) {
@@ -116,6 +103,7 @@ public class Board extends JComponent {
   /**
    * <p>Draws enemies on the board using the coordinates stored in the enemy classes</p>
    * <p>The pictures of the enemies are loaded here</p>
+   *
    * @param graphics
    */
   private void drawEnemy(Graphics graphics) {
@@ -124,28 +112,22 @@ public class Board extends JComponent {
 
     //drawing boss
     PositionedImage enemyImage = new PositionedImage(bossImagePath,
-            boss.getX() * tileSize,
-            boss.getY() * tileSize);
+        enemies.getFirst().getX() * tileSize,
+        enemies.getFirst().getY() * tileSize);
     enemyImage.draw(graphics);
 
     //drawing other enemies
-    enemyImage = new PositionedImage(skeletonImagePath,
-        skeleton1.getX() * tileSize,
-        skeleton1.getY() * tileSize);
-    enemyImage.draw(graphics);
-    enemyImage = new PositionedImage(skeletonImagePath,
-        skeleton2.getX() * tileSize,
-        skeleton2.getY() * tileSize);
-    enemyImage.draw(graphics);
-    enemyImage = new PositionedImage(skeletonImagePath,
-        skeleton3.getX() * tileSize,
-        skeleton3.getY() * tileSize);
-    enemyImage.draw(graphics);
+    for (Enemy enemy : enemies) {
+      enemyImage = new PositionedImage(skeletonImagePath,
+          enemy.getX() * tileSize,
+          enemy.getY() * tileSize);
+      enemyImage.draw(graphics);
+    }
   }
 
   private void drawStatistics(Graphics graphics) {
     String heroStats = String.format("Hero (Level %d) HP: %d/%d | DP: %d | SP: %d",
-        hero.getLevel(),hero.getHealth(),hero.getMaxHealth(),hero.getdP(),hero.getsP());
+        hero.getLevel(), hero.getHealth(), hero.getMaxHealth(), hero.getdP(), hero.getsP());
     //System.out.println(heroStats);
     graphics.setColor(Color.BLACK);
     graphics.fillRect(0, 720, 720, 40);
