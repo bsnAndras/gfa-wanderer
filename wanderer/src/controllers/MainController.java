@@ -1,11 +1,11 @@
 package controllers;
 
 import events.Battle;
-import events.MonstersMovingEvent;
 import java.util.List;
 import java.util.Random;
 import models.Area;
 import models.Hero;
+import models.areaelements.Tile;
 import models.characters.Enemy;
 import views.Board;
 
@@ -64,62 +64,50 @@ public class MainController implements KeyListener {
 
   @Override
   public void keyReleased(KeyEvent e) {
-    boolean heroCanMove;
     int obstacle;
+    Tile fromTile = area.getTiles(areaLevel)[hero.getY()][hero.getX()];
+    Tile toTile;
 
+    if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyChar() == 'w') {
 
-    if (e.getKeyCode() == KeyEvent.VK_UP ||
-        e.getKeyChar() == 'w') {
-      obstacle = area.detectObstacle(hero.getX(), hero.getY() - 1);
-      if (obstacle == 0) {
-        heroCanMove = true;
-      } else {
-        heroCanMove = false;
-        if (obstacle < 0) {
-          Battle battle = new Battle(hero, enemies.get(0));
-        }
+      try {
+        toTile = area.getTiles(areaLevel)[hero.getY() - 1][hero.getX()];
+      } catch (IndexOutOfBoundsException ex) {
+        toTile = fromTile;
       }
-      hero.moveUp(heroCanMove);
-    }
-    if (e.getKeyCode() == KeyEvent.VK_DOWN ||
-        e.getKeyChar() == 's') {
-      obstacle = area.detectObstacle(hero.getX(), hero.getY() + 1);
-      if (obstacle == 0) {
-        heroCanMove = true;
-      } else {
-        heroCanMove = false;
-        if (obstacle < 0) {
-          Battle battle = new Battle(hero, enemies.get(0));
-        }
+      hero.moveUp(fromTile, toTile);
+
+    } else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyChar() == 's') {
+
+      try {
+        toTile = area.getTiles(areaLevel)[hero.getY() + 1][hero.getX()];
+      } catch (IndexOutOfBoundsException ex) {
+        toTile = fromTile;
       }
-      hero.moveDown(heroCanMove);
-    }
-    if (e.getKeyCode() == KeyEvent.VK_LEFT ||
-        e.getKeyChar() == 'a') {
-      obstacle = area.detectObstacle(hero.getX() - 1, hero.getY());
-      if (obstacle == 0) {
-        heroCanMove = true;
-      } else {
-        heroCanMove = false;
-        if (obstacle < 0) {
-          Battle battle = new Battle(hero, enemies.get(0));
-        }
+
+      hero.moveDown(fromTile, toTile);
+
+    } else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyChar() == 'a') {
+
+      try {
+        toTile = area.getTiles(areaLevel)[hero.getY()][hero.getX() - 1];
+      } catch (IndexOutOfBoundsException ex) {
+        toTile = fromTile;
       }
-      hero.moveLeft(heroCanMove);
-    }
-    if (e.getKeyCode() == KeyEvent.VK_RIGHT ||
-        e.getKeyChar() == 'd') {
-      obstacle = area.detectObstacle(hero.getX() + 1, hero.getY());
-      if (obstacle == 0) {
-        heroCanMove = true;
-      } else {
-        heroCanMove = false;
-        if (obstacle < 0) {
-          Battle battle = new Battle(hero, enemies.get(0));
-        }
+
+      hero.moveLeft(fromTile, toTile);
+
+    } else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyChar() == 'd') {
+
+      try {
+        toTile = area.getTiles(areaLevel)[hero.getY()][hero.getX() + 1];
+      } catch (IndexOutOfBoundsException ex) {
+        toTile = fromTile;
       }
-      hero.moveRight(heroCanMove);
+
+      hero.moveRight(fromTile, toTile);
     }
+
     movementCounter++;
     if (movementCounter > 1) {
       //MonstersMovingEvent mME = new MonstersMovingEvent(area.getTiles(areaLevel), enemies);

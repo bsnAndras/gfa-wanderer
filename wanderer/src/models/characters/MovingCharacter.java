@@ -1,5 +1,9 @@
 package models.characters;
 
+import events.Battle;
+import models.areaelements.Tile;
+import models.areaelements.Wall;
+
 public abstract class MovingCharacter {
   protected int level;
   protected int maxHealth;
@@ -14,11 +18,13 @@ public abstract class MovingCharacter {
   protected int sP;
   protected int x;
   protected int y;
+  public boolean canMove;
 
   public MovingCharacter(int level, int x, int y) {
     this.level = level;
     this.x = x;
     this.y = y;
+    canMove = true;
     setMaxHealth();
     setdP();
     setsP();
@@ -29,11 +35,13 @@ public abstract class MovingCharacter {
    * <p>made abstract for use in subclasses</p>
    */
   public abstract void setMaxHealth();
+
   /**
    * <p>For setting up the dP (Defense Points) in the beginning of the game</p>
    * <p>made abstract for use in subclasses</p>
    */
   protected abstract void setdP();
+
   /**
    * <p>For setting up the sP (Strike Points) in the beginning of the game</p>
    * <p>made abstract for use in subclasses</p>
@@ -93,40 +101,115 @@ public abstract class MovingCharacter {
     return new int[] {this.x, this.y};
   }
 
-  /** Move the character 1 tile upwards if <u>canMove = TRUE</u>
-   *
-   * @param canMove checks is the character can move to that direction
+  /**
+   * Move the character 1 tile upwards, if it can
    */
-  public void moveUp(boolean canMove) {
+  public void moveUp(Tile fromTile, Tile toTile) {
+    int obstacle;
+    if (fromTile == toTile) {
+      obstacle = 1;
+    } else {
+      obstacle = detectObstacle(toTile);
+    }
+    if (obstacle != 0) {
+      canMove = false;
+      if (obstacle < 0) {
+        Battle battle = new Battle(this, toTile.getCharacter());
+      }
+    }
+
     if (canMove) {
       y--;
     }
   }
-  /** Move the character 1 tile downwards if <u>canMove = TRUE</u>
-   *
-   * @param canMove checks is the character can move to that direction
+
+  /**
+   * Move the character 1 tile downwards, if it can
    */
-  public void moveDown(boolean canMove) {
+  public void moveDown(Tile fromTile, Tile toTile) {
+    int obstacle;
+    if (fromTile == toTile) {
+      obstacle = 1;
+    } else {
+      obstacle = detectObstacle(toTile);
+    }
+    if (obstacle != 0) {
+      canMove = false;
+      if (obstacle < 0) {
+        Battle battle = new Battle(this, toTile.getCharacter());
+      }
+    }
+
     if (canMove) {
       y++;
     }
   }
-  /** Move the character 1 tile left if <u>canMove = TRUE</u>
-   *
-   * @param canMove checks is the character can move to that direction
+
+  /**
+   * Move the character 1 tile left, if it can
    */
-  public void moveLeft(boolean canMove) {
+  public void moveLeft(Tile fromTile, Tile toTile) {
+    int obstacle;
+    if (fromTile == toTile) {
+      obstacle = 1;
+    } else {
+      obstacle = detectObstacle(toTile);
+    }
+    if (obstacle != 0) {
+      canMove = false;
+      if (obstacle < 0) {
+        Battle battle = new Battle(this, toTile.getCharacter());
+      }
+    }
+
     if (canMove) {
       x--;
     }
   }
-  /** Move the character 1 tile right if <u>canMove = TRUE</u>
-   *
-   * @param canMove checks is the character can move to that direction
+
+  /**
+   * Move the character 1 tile right, if it can
    */
-  public void moveRight(boolean canMove) {
+  public void moveRight(Tile fromTile, Tile toTile) {
+    int obstacle;
+    if (fromTile == toTile) {
+      obstacle = 1;
+    } else {
+      obstacle = detectObstacle(toTile);
+    }
+    if (obstacle != 0) {
+      canMove = false;
+      if (obstacle < 0) {
+        Battle battle = new Battle(this, toTile.getCharacter());
+      }
+    }
+
     if (canMove) {
       x++;
+    }
+  }
+
+  /**
+   * A method for checking whether a Tile can be accessed and if it contains Enemy or not
+   *
+   * @param tile the Tile what we want to check if it is an obstacle
+   * @return <ul>
+   * <li>0 if free to go</li>
+   * <li>1 if Wall found</li>
+   * <li>-1 if Enemy found</li>
+   * </ul>
+   */
+
+  public int detectObstacle(Tile tile) {
+
+    if (tile instanceof Wall) {
+      //if wall -> 1
+      return 1;
+    } else if (tile.isOccupied()) {
+      //if enemy found -> -1
+      return -1;
+    } else {
+      return 0;
     }
   }
 }
