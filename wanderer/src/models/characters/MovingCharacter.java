@@ -68,8 +68,14 @@ public abstract class MovingCharacter {
     return health;
   }
 
-  public void setHealth(int health) {
+  public boolean setHealth(int health) {
+
     this.health = health;
+    if (health <= 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   public int getdP() {
@@ -107,6 +113,7 @@ public abstract class MovingCharacter {
 
   /**
    * Move the character 1 tile upwards, if it can
+   *
    * @return a Battle, if a battle began after the move
    */
   public Battle moveUp(Tile fromTile, Tile toTile) {
@@ -124,8 +131,7 @@ public abstract class MovingCharacter {
       } else {
         if (obstacle < 0) {
           isUnderBattle = true;
-          Battle battle = new Battle(this, toTile.getCharacter());
-          return battle;
+          return new Battle(this, toTile.getCharacter());
         }
       }
     }
@@ -152,8 +158,7 @@ public abstract class MovingCharacter {
       } else {
         if (obstacle < 0) {
           isUnderBattle = true;
-          Battle battle = new Battle(this, toTile.getCharacter());
-          return battle;
+          return new Battle(this, toTile.getCharacter());
         }
       }
     }
@@ -180,8 +185,7 @@ public abstract class MovingCharacter {
       } else {
         if (obstacle < 0) {
           isUnderBattle = true;
-          Battle battle = new Battle(this, toTile.getCharacter());
-          return battle;
+          return new Battle(this, toTile.getCharacter());
         }
       }
     }
@@ -208,8 +212,7 @@ public abstract class MovingCharacter {
       } else {
         if (obstacle < 0) {
           isUnderBattle = true;
-          Battle battle = new Battle(this, toTile.getCharacter());
-          return battle;
+          return new Battle(this, toTile.getCharacter());
         }
       }
     }

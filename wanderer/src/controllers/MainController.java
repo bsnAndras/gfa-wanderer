@@ -67,14 +67,9 @@ public class MainController implements KeyListener {
     Tile fromTile = area.getTiles(areaLevel)[hero.getY()][hero.getX()];
     Tile toTile;
 
-    if (hero.isUnderBattle) {
-      board.setDefender(battle.defender);
-      board.setOpponent((Enemy) (battle.defender == hero ? battle.attacker : battle.defender));
-      if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-        battle.fight();
-      }
-      board.repaint();
-    } else {
+    //If there's peace
+    if (!hero.isUnderBattle) {
+      //Hero's turn
       if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyChar() == 'w') {
 
         try {
@@ -114,13 +109,27 @@ public class MainController implements KeyListener {
 
         battle = hero.moveRight(fromTile, toTile);
       }
-
       movementCounter++;
-      if (movementCounter > 1) {
+
+      //enemy's turn if there's peace and hero moved enough
+      if (!hero.isUnderBattle && movementCounter > 1) {
         battle = MonstersMovingEvent.monstersMoving(area.getTiles(areaLevel), enemies);
         movementCounter = 0;
       }
-      board.repaint();
     }
+    board.repaint();
+
+    //if there's WAR
+    if(hero.isUnderBattle) {
+      board.setDefender(battle.defender);
+      board.setOpponent((Enemy) (battle.defender == hero ? battle.attacker : battle.defender));
+      board.repaint();
+
+      if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+        battle.fight();
+      }
+    }
+
+    board.repaint();
   }
 }

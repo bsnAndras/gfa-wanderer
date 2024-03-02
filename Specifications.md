@@ -62,7 +62,7 @@ the monsters holding the keys to the next level.
 
 - 🟩When a hero enters a tile which is occupied by a monster, a battle forms.
 - 🟩The character entering the occupied tile is the attacker.
-- 🟥When the player hits `space` his hero strikes on the defender and then it
+- 🟩When the player hits `space` his hero strikes on the defender and then it
   strikes back.
 - 🟥The attacker strikes on the defender, then the defender strikes and this
   continues until one of the characters dies.
