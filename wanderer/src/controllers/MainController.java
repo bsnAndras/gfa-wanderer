@@ -1,7 +1,7 @@
 package controllers;
 
-import events.Battle;
-import java.util.List;
+import events.MonstersMovingEvent;
+import java.util.ArrayList;
 import java.util.Random;
 import models.Area;
 import models.Hero;
@@ -17,7 +17,7 @@ public class MainController implements KeyListener {
   private Board board;
   int areaLevel;
   private Hero hero;
-  private List<Enemy> enemies;
+  private ArrayList<Enemy> enemies;
   private Area area;
   public static Random dice = new Random();
   int movementCounter = 0;
@@ -64,7 +64,6 @@ public class MainController implements KeyListener {
 
   @Override
   public void keyReleased(KeyEvent e) {
-    int obstacle;
     Tile fromTile = area.getTiles(areaLevel)[hero.getY()][hero.getX()];
     Tile toTile;
 
@@ -110,7 +109,7 @@ public class MainController implements KeyListener {
 
     movementCounter++;
     if (movementCounter > 1) {
-      //MonstersMovingEvent mME = new MonstersMovingEvent(area.getTiles(areaLevel), enemies);
+      MonstersMovingEvent.monstersMoving(area.getTiles(areaLevel), enemies);
       movementCounter = 0;
     }
     board.repaint();
