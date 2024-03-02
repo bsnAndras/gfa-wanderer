@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Area {
   private List<Tile[][]> tiles;
-  private List<Enemy> enemies;
+  private ArrayList<Enemy> enemies;
 
   public Area() {
     tiles = new ArrayList<>();
@@ -68,7 +68,7 @@ public class Area {
    * @param areaLevel the level of the Hero
    * @return a random List of Enemy with the same level as the Hero
    */
-  public List<Enemy> createEnemies(int areaLevel) {
+  public ArrayList<Enemy> createEnemies(int areaLevel) {
     this.enemies = new ArrayList<>();
     Boss boss;
     Enemy enemy;
