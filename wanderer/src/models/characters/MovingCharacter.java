@@ -5,6 +5,7 @@ import models.areaelements.Tile;
 import models.areaelements.Wall;
 
 public abstract class MovingCharacter {
+  public final String name;
   protected int level;
   protected int maxHealth;
   protected int health;
@@ -21,7 +22,8 @@ public abstract class MovingCharacter {
   public boolean canMove;
   public boolean isUnderBattle;
 
-  public MovingCharacter(int level, int x, int y) {
+  public MovingCharacter(String name, int level, int x, int y) {
+    this.name = name;
     this.level = level;
     this.x = x;
     this.y = y;

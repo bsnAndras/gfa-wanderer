@@ -2,13 +2,14 @@ package models.characters;
 
 import controllers.MainController;
 
-public class Boss extends Enemy{
+public class Boss extends Enemy {
 
 
   public Boss(int level, int x, int y) {
     //maxHP, sP, dP are set in the super constructor, but updated with this class' implementations
-    super(level, x, y);
+    super("Boss", level, x, y);
   }
+
   public void setMaxHealth() {
     super.setMaxHealth(); //maxHP = 2 * level * d6
     maxHealth += MainController.diceRoll(6);
@@ -17,7 +18,7 @@ public class Boss extends Enemy{
   @Override
   protected void setdP() {
     super.setdP(); //dP = X/2 * d6
-    dP +=  MainController.diceRoll(6)/2;
+    dP += MainController.diceRoll(6) / 2;
   }
 
   @Override

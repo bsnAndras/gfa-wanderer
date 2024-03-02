@@ -85,7 +85,7 @@ public class Area {
 
     for (int i = 1; i < enemyCount; i++) {
       do { //place enemies somewhere on the board
-        enemy = new Enemy(areaLevel + randomLevel(), randomCoord(), randomCoord());
+        enemy = new Enemy("Skeleton " + i, areaLevel + randomLevel(), randomCoord(), randomCoord());
       } while (getTiles(areaLevel)[enemy.getY()][enemy.getX()].isOccupied()
           || getTiles(areaLevel)[enemy.getY()][enemy.getX()] instanceof Wall);
       enemies.add(enemy);

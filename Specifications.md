@@ -23,7 +23,7 @@ the monsters holding the keys to the next level.
 - 🟩The game screen also contains a text area where info of the characters' are
   provided.
   - 🟩It shows all stats of the hero.
-  - 🟥If the hero is on the same tile with a monster, it shows all stats of the
+  - 🟩If the hero is on the same tile with a monster, it shows all stats of the
     monster as well.
 
 #### Moving

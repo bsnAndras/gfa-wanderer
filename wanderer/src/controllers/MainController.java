@@ -28,7 +28,7 @@ public class MainController implements KeyListener {
     //sets up every map layout with Tiles
     area = new Area();
     //sets up the Hero
-    this.hero = new Hero(1, 0, 0);
+    this.hero = new Hero("Hero", 1, 0, 0);
     this.areaLevel = 1;
     area.getTiles(areaLevel)[0][0].occupy(hero);
     //sets up a random number of monsters based on hero's level
@@ -69,9 +69,10 @@ public class MainController implements KeyListener {
 
     if (hero.isUnderBattle) {
       board.setDefender(battle.defender);
-      if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+      board.setOpponent((Enemy) (battle.defender == hero ? battle.attacker : battle.defender));
+    }
+    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 
-      }
     } else {
       if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyChar() == 'w') {
 

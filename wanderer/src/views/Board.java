@@ -140,16 +140,24 @@ public class Board extends JComponent {
   }
 
   private void drawStatistics(Graphics graphics) {
-    String heroStats = String.format("Hero (Level %d) HP: %d/%d | DP: %d | SP: %d",
-        hero.getLevel(), hero.getHealth(), hero.getMaxHealth(), hero.getdP(), hero.getsP());
+    String allStats;
+    String heroStats = String.format("%s (Level %d) HP: %d/%d | DP: %d | SP: %d",
+        hero.name, hero.getLevel(), hero.getHealth(), hero.getMaxHealth(), hero.getdP(),
+        hero.getsP());
 
-    //String opponentStats = String.format("%s (Level %d) HP: %d/%d | DP: %d | SP: %d",
-    //enemy.getLevel(), hero.getHealth(), hero.getMaxHealth(), hero.getdP(), hero.getsP());
+    if (opponent == null) {
+      allStats = String.format("%s", heroStats);
+    } else {
+      String opponentStats = String.format("%s (Level %d) HP: %d/%d | DP: %d | SP: %d",
+          opponent.name, opponent.getLevel(), opponent.getHealth(), opponent.getMaxHealth(),
+          opponent.getdP(), opponent.getsP());
+      allStats = String.format("%s     ----     %s", heroStats, opponentStats);
+    }
 
     graphics.setColor(Color.BLACK);
     graphics.fillRect(0, 720, 720, 40);
     graphics.setColor(Color.WHITE);
     graphics.setFont(new Font("Arial", Font.BOLD, 16));
-    graphics.drawString(heroStats, 20, 740);
+    graphics.drawString(allStats, 20, 740);
   }
 }

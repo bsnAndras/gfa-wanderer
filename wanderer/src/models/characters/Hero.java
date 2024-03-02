@@ -9,9 +9,9 @@ public class Hero extends MovingCharacter {
 
   private Direction direction;
 
-  public Hero(int level, int x, int y) {
+  public Hero(String name, int level, int x, int y) {
     //maxHP, sP, dP are set in the super constructor, but with this class' implementations
-    super(level, x, y);
+    super(name, level, x, y);
     health = maxHealth;
     direction = Direction.DOWN;
   }
@@ -41,21 +41,21 @@ public class Hero extends MovingCharacter {
 
   public Battle moveUp(Tile fromTile, Tile toTile) {
     direction = Direction.UP;
-    return super.moveUp(fromTile,toTile);
+    return super.moveUp(fromTile, toTile);
   }
 
   public Battle moveDown(Tile fromTile, Tile toTile) {
     direction = Direction.DOWN;
-    return super.moveDown(fromTile,toTile);
+    return super.moveDown(fromTile, toTile);
   }
 
   public Battle moveLeft(Tile fromTile, Tile toTile) {
     direction = Direction.LEFT;
-    return super.moveLeft(fromTile,toTile);
+    return super.moveLeft(fromTile, toTile);
   }
 
   public Battle moveRight(Tile fromTile, Tile toTile) {
     direction = Direction.RIGHT;
-    return super.moveRight(fromTile,toTile);
+    return super.moveRight(fromTile, toTile);
   }
 }

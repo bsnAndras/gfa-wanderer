@@ -4,9 +4,9 @@ import controllers.MainController;
 
 public class Enemy extends MovingCharacter {
 
-  public Enemy(int level, int x, int y) {
+  public Enemy(String name, int level, int x, int y) {
     //maxHP, sP, dP are set in the super constructor, but with this class' implementations
-    super(level,x, y);
+    super(name, level, x, y);
     health = maxHealth;
   }
 
