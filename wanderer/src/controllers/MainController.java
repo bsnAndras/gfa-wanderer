@@ -1,5 +1,6 @@
 package controllers;
 
+import events.Battle;
 import events.MonstersMovingEvent;
 import java.util.List;
 import java.util.Random;
@@ -25,7 +26,7 @@ public class MainController implements KeyListener {
     area = new Area();
     //sets up the Hero
     this.hero = new Hero(1, 0, 0);
-    this.areaLevel =1;
+    this.areaLevel = 1;
     area.getTiles(areaLevel)[0][0].occupy();
     //sets up a random number of monsters based on hero's level
     this.enemies = area.createEnemies(areaLevel);
@@ -61,27 +62,53 @@ public class MainController implements KeyListener {
   @Override
   public void keyReleased(KeyEvent e) {
     boolean heroCanMove;
+    int obstacle;
+
     if (e.getKeyCode() == KeyEvent.VK_UP ||
         e.getKeyChar() == 'w') {
-      heroCanMove = !area.detectObstacle(hero.getX(), hero.getY() - 1);
+      obstacle = area.detectObstacle(hero.getX(), hero.getY() - 1);
+      if (obstacle < 1) {
+        heroCanMove = true;
+        if(obstacle<0){
+          Battle battle = new Battle();
+        }
+      }else heroCanMove=false;
       hero.moveUp(heroCanMove);
     }
     if (e.getKeyCode() == KeyEvent.VK_DOWN ||
         e.getKeyChar() == 's') {
-      heroCanMove = !area.detectObstacle(hero.getX(), hero.getY() + 1);
+      obstacle = area.detectObstacle(hero.getX(), hero.getY() + 1);
+      if (obstacle < 1) {
+        heroCanMove = true;
+        if(obstacle<0){
+          Battle battle = new Battle();
+        }
+      }else heroCanMove=false;
       hero.moveDown(heroCanMove);
     }
     if (e.getKeyCode() == KeyEvent.VK_LEFT ||
         e.getKeyChar() == 'a') {
-      heroCanMove = !area.detectObstacle(hero.getX() - 1, hero.getY());
+      obstacle = area.detectObstacle(hero.getX() - 1, hero.getY());
+      if (obstacle < 1) {
+        heroCanMove = true;
+        if(obstacle<0){
+          Battle battle = new Battle();
+        }
+      }else heroCanMove=false;
       hero.moveLeft(heroCanMove);
     }
     if (e.getKeyCode() == KeyEvent.VK_RIGHT ||
         e.getKeyChar() == 'd') {
-      heroCanMove = !area.detectObstacle(hero.getX() + 1, hero.getY());
+      obstacle = area.detectObstacle(hero.getX() + 1, hero.getY());
+      if (obstacle < 1) {
+        heroCanMove = true;
+        if(obstacle<0){
+          Battle battle = new Battle();
+        }
+      }else heroCanMove=false;
       hero.moveRight(heroCanMove);
     }
-
+    MonstersMovingEvent mME = new MonstersMovingEvent(area.getTiles(areaLevel), enemies);
     board.repaint();
   }
 }

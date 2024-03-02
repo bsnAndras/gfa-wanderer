@@ -125,14 +125,30 @@ public class Area {
     return tiles.get(areaLevel);
   }
 
-  public boolean detectObstacle(int x, int y) {
+  /**
+   *
+   * @param x
+   * @param y
+   * @return <ul>
+   *   <li>0 if free to go</li>
+   *   <li>1 if Wall found</li>
+   *   <li>-1 if Enemy found</li>
+   * </ul>
+   */
+  public int detectObstacle(int x, int y) {
+
     if (x < 0 || x > 9 ||
         y < 0 || y > 9) {
-      return true;
+      //if out of the area -> 1
+      return 1;
     } else if (getTiles(1)[y][x] instanceof Wall) {
-      return true;
+      //if wall -> 1
+      return 1;
+    } else if (getTiles(1)[y][x].isOccupied()) {
+      //if enemy found -> -1
+      return -1;
     } else {
-      return false;
+      return 0;
     }
   }
 }
