@@ -20,6 +20,7 @@ public class MainController implements KeyListener {
   private List<Enemy> enemies;
   private Area area;
   public static Random dice = new Random();
+  int movementCounter = 0;
 
   public MainController(Board board) {
     //sets up every map layout with Tiles
@@ -64,15 +65,18 @@ public class MainController implements KeyListener {
     boolean heroCanMove;
     int obstacle;
 
+
     if (e.getKeyCode() == KeyEvent.VK_UP ||
         e.getKeyChar() == 'w') {
       obstacle = area.detectObstacle(hero.getX(), hero.getY() - 1);
       if (obstacle < 1) {
         heroCanMove = true;
-        if(obstacle<0){
+        if (obstacle < 0) {
           Battle battle = new Battle();
         }
-      }else heroCanMove=false;
+      } else {
+        heroCanMove = false;
+      }
       hero.moveUp(heroCanMove);
     }
     if (e.getKeyCode() == KeyEvent.VK_DOWN ||
@@ -80,10 +84,12 @@ public class MainController implements KeyListener {
       obstacle = area.detectObstacle(hero.getX(), hero.getY() + 1);
       if (obstacle < 1) {
         heroCanMove = true;
-        if(obstacle<0){
+        if (obstacle < 0) {
           Battle battle = new Battle();
         }
-      }else heroCanMove=false;
+      } else {
+        heroCanMove = false;
+      }
       hero.moveDown(heroCanMove);
     }
     if (e.getKeyCode() == KeyEvent.VK_LEFT ||
@@ -91,10 +97,12 @@ public class MainController implements KeyListener {
       obstacle = area.detectObstacle(hero.getX() - 1, hero.getY());
       if (obstacle < 1) {
         heroCanMove = true;
-        if(obstacle<0){
+        if (obstacle < 0) {
           Battle battle = new Battle();
         }
-      }else heroCanMove=false;
+      } else {
+        heroCanMove = false;
+      }
       hero.moveLeft(heroCanMove);
     }
     if (e.getKeyCode() == KeyEvent.VK_RIGHT ||
@@ -102,13 +110,19 @@ public class MainController implements KeyListener {
       obstacle = area.detectObstacle(hero.getX() + 1, hero.getY());
       if (obstacle < 1) {
         heroCanMove = true;
-        if(obstacle<0){
+        if (obstacle < 0) {
           Battle battle = new Battle();
         }
-      }else heroCanMove=false;
+      } else {
+        heroCanMove = false;
+      }
       hero.moveRight(heroCanMove);
     }
-    MonstersMovingEvent mME = new MonstersMovingEvent(area.getTiles(areaLevel), enemies);
+    movementCounter++;
+    if (movementCounter > 1) {
+      MonstersMovingEvent mME = new MonstersMovingEvent(area.getTiles(areaLevel), enemies);
+      movementCounter = 0;
+    }
     board.repaint();
   }
 }
