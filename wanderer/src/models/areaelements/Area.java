@@ -1,8 +1,11 @@
 package models;
 
+import java.util.Random;
 import models.areaelements.Floor;
 import models.areaelements.Tile;
 import models.areaelements.Wall;
+import models.characters.Boss;
+import models.characters.Enemy;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -10,6 +13,7 @@ import java.util.List;
 
 public class Area {
   private List<Tile[][]> tiles;
+  private List<Enemy> enemies;
 
   public Area() {
     tiles = new ArrayList<>();
@@ -56,6 +60,25 @@ public class Area {
       }
     }
     return firstTileMap;
+  }
+
+  /**
+   * <p>fills and returns a List of Enemy randomly with a Boss and 2-5 additional enemies.</p>
+   * @param level the level of the Hero
+   * @return a random List of Enemy with the same level as the Hero
+   */
+  public List<Enemy> createEnemies(int level) {
+    this.enemies = new ArrayList<>();
+    Random random = new Random();
+    int enemyCount = random.nextInt(3,7);
+    Boss boss = new Boss(level, 2, 1);
+
+    enemies.add(boss);
+
+    for (int i = 1; i < enemyCount; i++) {
+      enemies.add(new Enemy(level,i+2,i+2));
+    }
+    return enemies;
   }
 
   public Tile[][] getTiles(int index) {

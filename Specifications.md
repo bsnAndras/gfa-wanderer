@@ -13,7 +13,7 @@ the monsters holding the keys to the next level.
   the monsters) can move.
   - 🟩Every area contains 10 x 10 tiles.
 - 🟩There are tiles that cannot be occupied by any character (hero or monster).
-- 🟥Every area contains 3-6 monsters.
+- 🟩Every area contains 3-6 monsters.
 - 🟥The monsters levels come from the number of the area.
   - 🟥If its the Xth area, the monsters have level X (with 50% chance) or level
     X+1 (40%) or level X+2 (10%).
