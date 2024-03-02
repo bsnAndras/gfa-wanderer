@@ -14,8 +14,8 @@ the monsters holding the keys to the next level.
   - 🟩Every area contains 10 x 10 tiles.
 - 🟩There are tiles that cannot be occupied by any character (hero or monster).
 - 🟩Every area contains 3-6 monsters.
-- 🟥The monsters levels come from the number of the area.
-  - 🟥If its the Xth area, the monsters have level X (with 50% chance) or level
+- 🟩The monsters levels come from the number of the area.
+  - 🟩If its the Xth area, the monsters have level X (with 50% chance) or level
     X+1 (40%) or level X+2 (10%).
 - 🟩One of the monsters is the boss.
 - 🟥One of the monsters (not the boss) is holding the key, so if it is killed the
