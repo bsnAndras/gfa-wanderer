@@ -9,6 +9,7 @@ import models.areaelements.Tile;
 
 import javax.swing.*;
 import java.awt.*;
+import models.characters.Boss;
 import models.characters.Enemy;
 
 public class Board extends JComponent {
@@ -107,18 +108,16 @@ public class Board extends JComponent {
    * @param graphics
    */
   private void drawEnemy(Graphics graphics) {
-    String bossImagePath = "img/boss.png";
-    String skeletonImagePath = "img/skeleton.png";
+    String imagePath;
+    PositionedImage enemyImage;
 
-    //drawing boss
-    PositionedImage enemyImage = new PositionedImage(bossImagePath,
-        enemies.getFirst().getX() * tileSize,
-        enemies.getFirst().getY() * tileSize);
-    enemyImage.draw(graphics);
-
-    //drawing other enemies
     for (Enemy enemy : enemies) {
-      enemyImage = new PositionedImage(skeletonImagePath,
+      if (enemy instanceof Boss) {
+        imagePath = "img/boss.png";
+      } else {
+        imagePath = "img/skeleton.png";
+      }
+      enemyImage = new PositionedImage(imagePath,
           enemy.getX() * tileSize,
           enemy.getY() * tileSize);
       enemyImage.draw(graphics);
