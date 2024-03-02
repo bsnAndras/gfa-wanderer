@@ -64,21 +64,46 @@ public class Area {
 
   /**
    * <p>fills and returns a List of Enemy randomly with a Boss and 2-5 additional enemies.</p>
+   *
    * @param level the level of the Hero
    * @return a random List of Enemy with the same level as the Hero
    */
   public List<Enemy> createEnemies(int level) {
     this.enemies = new ArrayList<>();
+    Boss boss;
+    Enemy enemy;
     Random random = new Random();
-    int enemyCount = random.nextInt(3,7);
-    Boss boss = new Boss(level, 2, 1);
+    int enemyCount = random.nextInt(3, 7);
 
+    do { //place the Boss somewhere on the board
+      boss = new Boss(level, randomCoord(), randomCoord());
+    } while (getTiles(level)[boss.getY()][boss.getX()].isOccupied()
+        || getTiles(level)[boss.getY()][boss.getX()] instanceof Wall);
     enemies.add(boss);
+    //set the Tile occupied
+    getTiles(level)[boss.getY()][boss.getX()].occupy();
 
     for (int i = 1; i < enemyCount; i++) {
-      enemies.add(new Enemy(level,i+2,i+2));
+      do { //place enemies somewhere on the board
+        enemy = new Enemy(level, randomCoord(), randomCoord());
+      } while (getTiles(level)[enemy.getY()][enemy.getX()].isOccupied()
+          || getTiles(level)[enemy.getY()][enemy.getX()] instanceof Wall);
+      enemies.add(enemy);
+      //set the Tile occupied
+      getTiles(level)[enemy.getY()][enemy.getX()].occupy();
     }
     return enemies;
+  }
+
+  /**
+   * Gives back a random number between 0-9
+   * to use as a coordinate on a 10x10 board
+   *
+   * @return a random X or Y coordinate
+   */
+  private int randomCoord() {
+    Random random = new Random();
+    return random.nextInt(10);
   }
 
   public Tile[][] getTiles(int index) {

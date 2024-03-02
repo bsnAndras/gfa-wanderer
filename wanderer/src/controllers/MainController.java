@@ -23,6 +23,7 @@ public class MainController implements KeyListener {
     area = new Area();
     //sets up the Hero
     this.hero = new Hero(1, 0, 0);
+    area.getTiles(1)[0][0].occupy();
     //sets up a random number of monsters based on hero's level
     this.enemies = area.createEnemies(hero.getLevel());
     //loads the board and give it the hero, the monsters
