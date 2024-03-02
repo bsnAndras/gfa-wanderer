@@ -9,16 +9,16 @@ import models.areaelements.Tile;
 import javax.swing.*;
 import java.awt.*;
 import models.characters.Boss;
-import models.characters.Skeleton;
+import models.characters.Enemy;
 
 public class Board extends JComponent {
 
   private Hero hero;
   private Boss boss;
   private Area area;
-  private Skeleton skeleton1;
-  private Skeleton skeleton2;
-  private Skeleton skeleton3;
+  private Enemy skeleton1;
+  private Enemy skeleton2;
+  private Enemy skeleton3;
 
   private final int tileSize;
 
@@ -36,15 +36,15 @@ public class Board extends JComponent {
     this.boss = boss;
   }
 
-  public void setSkeleton1(Skeleton skeleton1) {
+  public void setSkeleton1(Enemy skeleton1) {
     this.skeleton1 = skeleton1;
   }
 
-  public void setSkeleton2(Skeleton skeleton2) {
+  public void setSkeleton2(Enemy skeleton2) {
     this.skeleton2 = skeleton2;
   }
 
-  public void setSkeleton3(Skeleton skeleton3) {
+  public void setSkeleton3(Enemy skeleton3) {
     this.skeleton3 = skeleton3;
   }
 
