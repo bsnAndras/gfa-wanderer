@@ -1,5 +1,6 @@
 package controllers;
 
+import events.MonstersMovingEvent;
 import java.util.List;
 import java.util.Random;
 import models.Area;
@@ -13,19 +14,21 @@ import java.awt.event.KeyListener;
 public class MainController implements KeyListener {
 
   private Board board;
+  int areaLevel;
   private Hero hero;
   private List<Enemy> enemies;
   private Area area;
   public static Random dice = new Random();
 
   public MainController(Board board) {
-    //sets up every maps layout with Tiles
+    //sets up every map layout with Tiles
     area = new Area();
     //sets up the Hero
     this.hero = new Hero(1, 0, 0);
-    area.getTiles(1)[0][0].occupy();
+    this.areaLevel =1;
+    area.getTiles(areaLevel)[0][0].occupy();
     //sets up a random number of monsters based on hero's level
-    this.enemies = area.createEnemies(hero.getLevel());
+    this.enemies = area.createEnemies(areaLevel);
     //loads the board and give it the hero, the monsters
     // and the tiles(area) to draw
     this.board = board;

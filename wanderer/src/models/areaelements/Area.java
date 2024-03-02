@@ -21,6 +21,21 @@ public class Area {
   }
 
   private void generateTiles() {
+    int[][] zeroTiles =
+        {
+            {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 0, 0, 0, 0, 1, 1, 1, 1},
+            {0, 1, 1, 1, 1, 0, 1, 0, 0, 0},
+            {0, 0, 0, 0, 1, 0, 1, 0, 0, 0},
+            {0, 0, 1, 0, 1, 0, 1, 0, 0, 0},
+            {0, 1, 1, 0, 1, 0, 1, 1, 0, 1},
+            {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+            {1, 1, 1, 1, 1, 0, 1, 0, 1, 0},
+            {0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
+            {0, 0, 1, 1, 1, 0, 0, 0, 1, 0}};
+
+    tiles.add(generateTileMap(zeroTiles));
+
     int[][] firstTiles =
         {
             {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -33,42 +48,27 @@ public class Area {
             {1, 1, 1, 1, 1, 0, 1, 0, 1, 0},
             {0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
             {0, 0, 1, 1, 1, 0, 0, 0, 1, 0}};
-
     tiles.add(generateTileMap(firstTiles));
-
-    int[][] secondTiles =
-        {
-            {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 1, 0, 0, 0, 0, 1, 1, 1, 1},
-            {0, 1, 1, 1, 1, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 1, 0, 0, 0},
-            {0, 0, 1, 0, 1, 0, 1, 0, 0, 0},
-            {0, 1, 1, 0, 1, 0, 1, 1, 0, 1},
-            {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-            {1, 1, 1, 1, 1, 0, 1, 0, 1, 0},
-            {0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
-            {0, 0, 1, 1, 1, 0, 0, 0, 1, 0}};
-    tiles.add(generateTileMap(secondTiles));
   }
 
   @NotNull
-  private static Tile[][] generateTileMap(int[][] firstTiles) {
-    Tile[][] firstTileMap = new Tile[firstTiles.length][firstTiles.length];
-    for (int i = 0; i < firstTiles.length; i++) {
-      for (int j = 0; j < firstTiles[i].length; j++) {
-        firstTileMap[i][j] = firstTiles[i][j] == 0 ? new Floor() : new Wall();
+  private static Tile[][] generateTileMap(int[][] intTiles) {
+    Tile[][] tileMap = new Tile[intTiles.length][intTiles.length];
+    for (int i = 0; i < intTiles.length; i++) {
+      for (int j = 0; j < intTiles[i].length; j++) {
+        tileMap[i][j] = intTiles[i][j] == 0 ? new Floor() : new Wall();
       }
     }
-    return firstTileMap;
+    return tileMap;
   }
 
   /**
    * <p>fills and returns a List of Enemy randomly with a Boss and 2-5 additional enemies.</p>
    *
-   * @param heroLevel the level of the Hero
+   * @param areaLevel the level of the Hero
    * @return a random List of Enemy with the same level as the Hero
    */
-  public List<Enemy> createEnemies(int heroLevel) {
+  public List<Enemy> createEnemies(int areaLevel) {
     this.enemies = new ArrayList<>();
     Boss boss;
     Enemy enemy;
@@ -76,21 +76,21 @@ public class Area {
     int enemyCount = random.nextInt(3, 7);
 
     do { //place the Boss somewhere on the board
-      boss = new Boss(heroLevel + randomLevel(), randomCoord(), randomCoord());
-    } while (getTiles(heroLevel)[boss.getY()][boss.getX()].isOccupied()
-        || getTiles(heroLevel)[boss.getY()][boss.getX()] instanceof Wall);
+      boss = new Boss(areaLevel + randomLevel(), randomCoord(), randomCoord());
+    } while (getTiles(areaLevel)[boss.getY()][boss.getX()].isOccupied()
+        || getTiles(areaLevel)[boss.getY()][boss.getX()] instanceof Wall);
     enemies.add(boss);
     //set the Tile occupied
-    getTiles(heroLevel)[boss.getY()][boss.getX()].occupy();
+    getTiles(areaLevel)[boss.getY()][boss.getX()].occupy();
 
     for (int i = 1; i < enemyCount; i++) {
       do { //place enemies somewhere on the board
-        enemy = new Enemy(heroLevel + randomLevel(), randomCoord(), randomCoord());
-      } while (getTiles(heroLevel)[enemy.getY()][enemy.getX()].isOccupied()
-          || getTiles(heroLevel)[enemy.getY()][enemy.getX()] instanceof Wall);
+        enemy = new Enemy(areaLevel + randomLevel(), randomCoord(), randomCoord());
+      } while (getTiles(areaLevel)[enemy.getY()][enemy.getX()].isOccupied()
+          || getTiles(areaLevel)[enemy.getY()][enemy.getX()] instanceof Wall);
       enemies.add(enemy);
       //set the Tile occupied
-      getTiles(heroLevel)[enemy.getY()][enemy.getX()].occupy();
+      getTiles(areaLevel)[enemy.getY()][enemy.getX()].occupy();
     }
     return enemies;
   }
@@ -121,8 +121,8 @@ public class Area {
   }
 
 
-  public Tile[][] getTiles(int index) {
-    return tiles.get(index);
+  public Tile[][] getTiles(int areaLevel) {
+    return tiles.get(areaLevel);
   }
 
   public boolean detectObstacle(int x, int y) {
