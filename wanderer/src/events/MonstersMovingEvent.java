@@ -27,42 +27,41 @@ public class MonstersMovingEvent {
     Tile fromTile = tileMap[enemy.getY()][enemy.getX()];
     Tile toTile;
 
-    while (true) {
-      int direction = random.nextInt(4);
-      switch (direction) {
-        case 0 -> {
-          try {
-            toTile = tileMap[enemy.getY() - 1][enemy.getX()];
-          } catch (IndexOutOfBoundsException e) {
-            continue;
-          }
-          return enemy.moveUp(fromTile, toTile);
+    int direction = random.nextInt(4);
+    switch (direction) {
+      case 0 -> {
+        try {
+          toTile = tileMap[enemy.getY() - 1][enemy.getX()];
+        } catch (IndexOutOfBoundsException e) {
+          toTile = fromTile;
         }
-        case 1 -> {
-          try {
-            toTile = tileMap[enemy.getY() + 1][enemy.getX()];
-          } catch (IndexOutOfBoundsException e) {
-            continue;
-          }
-          return enemy.moveDown(fromTile, toTile);
+        return enemy.moveUp(fromTile, toTile);
+      }
+      case 1 -> {
+        try {
+          toTile = tileMap[enemy.getY() + 1][enemy.getX()];
+        } catch (IndexOutOfBoundsException e) {
+          toTile = fromTile;
         }
-        case 2 -> {
-          try {
-            toTile = tileMap[enemy.getY()][enemy.getX() - 1];
-          } catch (IndexOutOfBoundsException e) {
-            continue;
-          }
-          return enemy.moveLeft(fromTile, toTile);
+        return enemy.moveDown(fromTile, toTile);
+      }
+      case 2 -> {
+        try {
+          toTile = tileMap[enemy.getY()][enemy.getX() - 1];
+        } catch (IndexOutOfBoundsException e) {
+          toTile = fromTile;
         }
-        case 3 -> {
-          try {
-            toTile = tileMap[enemy.getY()][enemy.getX() + 1];
-          } catch (IndexOutOfBoundsException e) {
-            continue;
-          }
-          return enemy.moveRight(fromTile, toTile);
+        return enemy.moveLeft(fromTile, toTile);
+      }
+      case 3 -> {
+        try {
+          toTile = tileMap[enemy.getY()][enemy.getX() + 1];
+        } catch (IndexOutOfBoundsException e) {
+          toTile = fromTile;
         }
+        return enemy.moveRight(fromTile, toTile);
       }
     }
+    return null;
   }
 }
