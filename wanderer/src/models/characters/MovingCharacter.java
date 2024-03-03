@@ -72,6 +72,7 @@ public abstract class MovingCharacter {
 
     this.health = health;
     if (health <= 0) {
+      this.health = 0;
       return false;
     } else {
       return true;

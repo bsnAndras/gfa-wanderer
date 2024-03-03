@@ -160,4 +160,14 @@ public class Board extends JComponent {
     graphics.setFont(new Font("Arial", Font.BOLD, 16));
     graphics.drawString(allStats, 20, 740);
   }
+  public void drawEndGame(Graphics graphics){
+    String gameOver = "GAME OVER!";
+    graphics.setColor(Color.BLACK);
+    graphics.fillRect(60,60,660,660);
+    graphics.setColor(new Color(200,200,200));
+    graphics.fillRect(0, 720, 720, 40);
+    graphics.setColor(Color.BLACK);
+    graphics.setFont(new Font("Arial", Font.BOLD, 36));
+    graphics.drawString(gameOver, 200, 440);
+  }
 }

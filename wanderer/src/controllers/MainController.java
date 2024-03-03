@@ -8,6 +8,7 @@ import models.Area;
 import models.Hero;
 import models.areaelements.Tile;
 import models.characters.Enemy;
+import models.characters.MovingCharacter;
 import views.Board;
 
 import java.awt.event.KeyEvent;
@@ -119,17 +120,41 @@ public class MainController implements KeyListener {
     }
     board.repaint();
 
-    //if there's WAR
-    if(hero.isUnderBattle) {
+    //if there's BATTLE
+    if (hero.isUnderBattle) {
+
       board.setDefender(battle.defender);
-      board.setOpponent((Enemy) (battle.defender == hero ? battle.attacker : battle.defender));
+      if (battle.defender == hero) {
+        battle.strike(battle.attacker);
+        board.setOpponent((Enemy) battle.attacker);
+      } else {
+        board.setOpponent((Enemy) battle.defender);
+      }
+
       board.repaint();
 
       if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-        battle.fight();
+        //battle.fight();
+        kill(battle.defender);
+        board.setHero(hero);
+        board.setEnemies(enemies);
+        battle.attacker.isUnderBattle = false;
+        board.setOpponent(null);
+        return;
       }
     }
 
     board.repaint();
+  }
+
+  private void kill(MovingCharacter defender) {
+    defender.setHealth(0);
+    area.getTiles(areaLevel)[defender.getY()][defender.getX()].leave();
+    if (defender instanceof Hero) {
+      System.out.println("GAME OVER!");
+      board.drawEndGame(board.getGraphics());
+    } else {
+      enemies.remove(defender);
+    }
   }
 }

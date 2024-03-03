@@ -1,11 +1,14 @@
 package events;
 
 import controllers.MainController;
+import models.Hero;
+import models.areaelements.Tile;
 import models.characters.MovingCharacter;
 
 public class Battle {
   public MovingCharacter attacker;
   public MovingCharacter defender;
+  public Hero hero;
 
   public Battle(MovingCharacter attacker, MovingCharacter defender) {
     this.attacker = attacker;
