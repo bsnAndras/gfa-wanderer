@@ -69,15 +69,26 @@ public abstract class MovingCharacter {
     return health;
   }
 
+  /** Sets the current health of the character
+   *
+   * @param health the new health points to set
+   * @return if the character lives
+   */
   public boolean setHealth(int health) {
 
     this.health = health;
     if (health <= 0) {
       this.health = 0;
+      die();
       return false;
     } else {
       return true;
     }
+  }
+
+  private void die() {
+    currentTile.leave();
+    System.out.printf("%s died.\n",name);
   }
 
   public int getdP() {
