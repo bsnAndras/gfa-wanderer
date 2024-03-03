@@ -1,6 +1,7 @@
 package views;
 
 import java.util.List;
+import javax.swing.border.Border;
 import models.Area;
 import models.Direction;
 import models.Hero;
@@ -62,6 +63,9 @@ public class Board extends JComponent {
     drawHero(graphics);
     drawEnemy(graphics);
     drawStatistics(graphics);
+    if (hero.getHealth() <= 0) {
+      drawEndGame(graphics);
+    }
   }
 
   /**
@@ -160,14 +164,18 @@ public class Board extends JComponent {
     graphics.setFont(new Font("Arial", Font.BOLD, 16));
     graphics.drawString(allStats, 20, 740);
   }
-  public void drawEndGame(Graphics graphics){
+
+  public void drawEndGame(Graphics graphics) {
     String gameOver = "GAME OVER!";
-    graphics.setColor(Color.BLACK);
-    graphics.fillRect(60,60,660,660);
-    graphics.setColor(new Color(200,200,200));
-    graphics.fillRect(0, 720, 720, 40);
-    graphics.setColor(Color.BLACK);
-    graphics.setFont(new Font("Arial", Font.BOLD, 36));
-    graphics.drawString(gameOver, 200, 440);
+    //background tinted - dark grey with opacity
+    graphics.setColor(new Color(0,0,0, 180));
+    graphics.fillRect(0, 0, 720, 760);
+    //text box - dark grey
+    graphics.setColor(new Color(10,10,10));
+    graphics.fillRect(80, 200, 560, 320);
+    //text white-ish
+    graphics.setColor(new Color(232, 232, 232));
+    graphics.setFont(new Font("Arial", Font.BOLD, 60));
+    graphics.drawString(gameOver, 160, 350);
   }
 }

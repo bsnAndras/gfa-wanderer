@@ -135,12 +135,11 @@ public class MainController implements KeyListener {
 
       if (e.getKeyCode() == KeyEvent.VK_SPACE) {
         //battle.fight();
-        kill(battle.defender);
+        kill(hero);
         board.setHero(hero);
         board.setEnemies(enemies);
         battle.attacker.isUnderBattle = false;
         board.setOpponent(null);
-        return;
       }
     }
 
@@ -152,7 +151,6 @@ public class MainController implements KeyListener {
     area.getTiles(areaLevel)[defender.getY()][defender.getX()].leave();
     if (defender instanceof Hero) {
       System.out.println("GAME OVER!");
-      board.drawEndGame(board.getGraphics());
     } else {
       enemies.remove(defender);
     }
