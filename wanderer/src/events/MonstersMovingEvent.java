@@ -24,7 +24,7 @@ public class MonstersMovingEvent {
 
   public static Battle moveRandomly(MovingCharacter enemy, Tile[][] tileMap) {
     Random random = new Random();
-    Tile fromTile = tileMap[enemy.getY()][enemy.getX()];
+    Tile fromTile = enemy.getCurrentTile();
     Tile toTile;
 
     int direction = random.nextInt(4);
@@ -35,7 +35,7 @@ public class MonstersMovingEvent {
         } catch (IndexOutOfBoundsException e) {
           toTile = fromTile;
         }
-        return enemy.moveUp(fromTile, toTile);
+        return enemy.moveUp(toTile);
       }
       case 1 -> {
         try {
@@ -43,7 +43,7 @@ public class MonstersMovingEvent {
         } catch (IndexOutOfBoundsException e) {
           toTile = fromTile;
         }
-        return enemy.moveDown(fromTile, toTile);
+        return enemy.moveDown(toTile);
       }
       case 2 -> {
         try {
@@ -51,7 +51,7 @@ public class MonstersMovingEvent {
         } catch (IndexOutOfBoundsException e) {
           toTile = fromTile;
         }
-        return enemy.moveLeft(fromTile, toTile);
+        return enemy.moveLeft(toTile);
       }
       case 3 -> {
         try {
@@ -59,7 +59,7 @@ public class MonstersMovingEvent {
         } catch (IndexOutOfBoundsException e) {
           toTile = fromTile;
         }
-        return enemy.moveRight(fromTile, toTile);
+        return enemy.moveRight(toTile);
       }
     }
     return null;

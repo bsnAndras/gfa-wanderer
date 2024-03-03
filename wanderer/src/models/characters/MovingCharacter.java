@@ -19,6 +19,7 @@ public abstract class MovingCharacter {
   protected int sP;
   protected int x;
   protected int y;
+  private Tile currentTile;
   public boolean canMove;
   public boolean isUnderBattle;
 
@@ -112,22 +113,30 @@ public abstract class MovingCharacter {
     return new int[] {this.x, this.y};
   }
 
+  public Tile getCurrentTile() {
+    return currentTile;
+  }
+
+  public void setCurrentTile(Tile currentTile) {
+    this.currentTile = currentTile;
+  }
+
   /**
    * Move the character 1 tile upwards, if it can
    *
    * @return a Battle, if a battle began after the move
    */
-  public Battle moveUp(Tile fromTile, Tile toTile) {
+  public Battle moveUp(Tile toTile) {
     int obstacle;
     if (!isUnderBattle) {
-      if (fromTile == toTile) {
+      if (currentTile == toTile) {
         obstacle = 1;
       } else {
         obstacle = detectObstacle(toTile);
       }
       if (obstacle == 0) {
         y--;
-        fromTile.leave();
+        currentTile.leave();
         toTile.occupy(this);
       } else {
         if (obstacle < 0) {
@@ -144,17 +153,17 @@ public abstract class MovingCharacter {
    *
    * @return a Battle, if a battle began after the move
    */
-  public Battle moveDown(Tile fromTile, Tile toTile) {
+  public Battle moveDown(Tile toTile) {
     int obstacle;
     if (!isUnderBattle) {
-      if (fromTile == toTile) {
+      if (currentTile == toTile) {
         obstacle = 1;
       } else {
         obstacle = detectObstacle(toTile);
       }
       if (obstacle == 0) {
         y++;
-        fromTile.leave();
+        currentTile.leave();
         toTile.occupy(this);
       } else {
         if (obstacle < 0) {
@@ -171,17 +180,17 @@ public abstract class MovingCharacter {
    *
    * @return a Battle, if a battle began after the move
    */
-  public Battle moveLeft(Tile fromTile, Tile toTile) {
+  public Battle moveLeft(Tile toTile) {
     int obstacle;
     if (!isUnderBattle) {
-      if (fromTile == toTile) {
+      if (currentTile == toTile) {
         obstacle = 1;
       } else {
         obstacle = detectObstacle(toTile);
       }
       if (obstacle == 0) {
         x--;
-        fromTile.leave();
+        currentTile.leave();
         toTile.occupy(this);
       } else {
         if (obstacle < 0) {
@@ -198,17 +207,17 @@ public abstract class MovingCharacter {
    *
    * @return a Battle, if a battle began after the move
    */
-  public Battle moveRight(Tile fromTile, Tile toTile) {
+  public Battle moveRight(Tile toTile) {
     int obstacle;
     if (!isUnderBattle) {
-      if (fromTile == toTile) {
+      if (currentTile == toTile) {
         obstacle = 1;
       } else {
         obstacle = detectObstacle(toTile);
       }
       if (obstacle == 0) {
         x++;
-        fromTile.leave();
+        currentTile.leave();
         toTile.occupy(this);
       } else {
         if (obstacle < 0) {

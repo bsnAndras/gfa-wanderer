@@ -1,6 +1,7 @@
 package models.characters;
 
 import controllers.MainController;
+import models.areaelements.Tile;
 
 public class Boss extends Enemy {
 

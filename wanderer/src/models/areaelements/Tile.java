@@ -18,13 +18,15 @@ public abstract class Tile {
   }
 
   public void occupy(MovingCharacter character) {
+    this.character = character;
+    character.setCurrentTile(this);
     isOccupied = true;
-    this.character=character;
   }
 
   public void leave() {
+    character.setCurrentTile(null);
+    this.character = null;
     isOccupied = false;
-    this.character=null;
   }
 
   public MovingCharacter getCharacter() {

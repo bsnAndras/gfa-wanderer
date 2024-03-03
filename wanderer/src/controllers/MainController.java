@@ -65,7 +65,7 @@ public class MainController implements KeyListener {
 
   @Override
   public void keyReleased(KeyEvent e) {
-    Tile fromTile = area.getTiles(areaLevel)[hero.getY()][hero.getX()];
+    Tile fromTile = hero.getCurrentTile();
     Tile toTile;
 
     //If there's peace
@@ -78,7 +78,7 @@ public class MainController implements KeyListener {
         } catch (IndexOutOfBoundsException ex) {
           toTile = fromTile;
         }
-        battle = hero.moveUp(fromTile, toTile);
+        battle = hero.moveUp(toTile);
 
       } else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyChar() == 's') {
 
@@ -88,7 +88,7 @@ public class MainController implements KeyListener {
           toTile = fromTile;
         }
 
-        battle = hero.moveDown(fromTile, toTile);
+        battle = hero.moveDown(toTile);
 
       } else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyChar() == 'a') {
 
@@ -98,7 +98,7 @@ public class MainController implements KeyListener {
           toTile = fromTile;
         }
 
-        battle = hero.moveLeft(fromTile, toTile);
+        battle = hero.moveLeft(toTile);
 
       } else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyChar() == 'd') {
 
@@ -108,7 +108,7 @@ public class MainController implements KeyListener {
           toTile = fromTile;
         }
 
-        battle = hero.moveRight(fromTile, toTile);
+        battle = hero.moveRight(toTile);
       }
       movementCounter++;
 
