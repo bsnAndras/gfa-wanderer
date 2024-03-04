@@ -60,10 +60,11 @@ public class Board extends JComponent {
     super.paint(graphics);
 
     drawTiles(graphics);
-    drawHero(graphics);
     drawEnemy(graphics);
     drawStatistics(graphics);
-    if (hero.getHealth() <= 0) {
+    if (hero.getHealth() > 0) {
+      drawHero(graphics);
+    } else {
       drawEndGame(graphics);
     }
   }
@@ -168,10 +169,10 @@ public class Board extends JComponent {
   public void drawEndGame(Graphics graphics) {
     String gameOver = "GAME OVER!";
     //background tinted - dark grey with opacity
-    graphics.setColor(new Color(0,0,0, 180));
+    graphics.setColor(new Color(0, 0, 0, 180));
     graphics.fillRect(0, 0, 720, 760);
     //text box - dark grey
-    graphics.setColor(new Color(10,10,10));
+    graphics.setColor(new Color(10, 10, 10));
     graphics.fillRect(80, 200, 560, 320);
     //text white-ish
     graphics.setColor(new Color(232, 232, 232));

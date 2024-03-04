@@ -28,7 +28,9 @@ public class Battle {
   public MovingCharacter fight() {
     if (strike(attacker) != null) {
       return attacker;
-    }else return strike(defender);
+    } else {
+      return strike(defender);
+    }
   }
 
   public MovingCharacter strike(MovingCharacter striker) {
@@ -43,8 +45,11 @@ public class Battle {
     if (sV > dP) {
       if (!defender.setHealth(defender.getHealth() - (sV - dP))) {
         kill(defender);
+        striker.isUnderBattle = false;
         return striker;
       }
+    } else {
+      System.out.println("- Miss! -");
     }
     return null;
   }
@@ -56,7 +61,6 @@ public class Battle {
     } else {
       enemyList.remove(victim);
     }
-    attacker.isUnderBattle = false;
   }
 
 }

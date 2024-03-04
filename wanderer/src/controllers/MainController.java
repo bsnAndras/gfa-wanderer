@@ -126,7 +126,7 @@ public class MainController implements KeyListener {
 
       board.setDefender(battle.defender);
       if (battle.defender == hero) {
-        battle.strike(battle.attacker);
+        //battle.strike(battle.attacker);
         board.setOpponent((Enemy) battle.attacker);
       } else {
         board.setOpponent((Enemy) battle.defender);
@@ -135,10 +135,10 @@ public class MainController implements KeyListener {
       board.repaint();
 
       if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-        battle.fight();
-        board.setHero(hero);
-        board.setEnemies(enemies);
-        board.setOpponent(null);
+        if (battle.fight() != null) {
+          board.setDefender(null);
+          board.setOpponent(null);
+        }
       }
     }
 
