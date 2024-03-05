@@ -31,6 +31,7 @@ the monsters holding the keys to the next level.
 - 🟩The hero can move tile-by-tile in four directions on the screen by using the
   corresponding arrows (or "WASD" if preferred).
 - 🟩After every two move, the monsters move one tile as well.
+- 🟥(debug) some monsters don't move at certain situations
 
 #### 🟩The Characters
 
@@ -61,6 +62,7 @@ the monsters holding the keys to the next level.
 #### 🟩Battle
 
 - 🟩When a hero enters a tile which is occupied by a monster, a battle forms.
+- 🟥(debug) When a monster meets another monster, no battle occurs.
 - 🟩The character entering the occupied tile is the attacker.
 - 🟩When the player hits `space` his hero strikes on the defender and then it
   strikes back.
@@ -88,6 +90,7 @@ the monsters holding the keys to the next level.
 - 🟩When killing the monster who held the key to the next area, the hero enters
   immediately.
   - 🟩Which is like the previous one just with new and higher level monsters.
+  - 🟥After the last level, the game prints out the end stats.
 - 🟩When entering a new area the hero has:
   - 🟩10% chance to restore all his HP.
   - 🟩40% chance to restore the third of his HP.
@@ -96,3 +99,25 @@ the monsters holding the keys to the next level.
   - 🟩HP: 2 \* X \* d6
   - 🟩DP: X / 2 \* d6
   - 🟩SP: X \* d6
+
+## Optional features
+
+### 🟩Update characters on moving hero
+
+- 🟩The characters should only move when the player moves the hero
+
+### 🟥Random map
+
+- 🟥When map is created the placement of walls should be random
+- 🟥Make sure that all floor tiles are connected
+
+### 🟥Leveling
+
+- 🟥Add more hp / damage to the hero according to the specification
+- 🟥Add more hp / damage to the monsters
+- 🟥Implement random events which happen when entering the new area
+
+### 🟥Monsters moving around
+
+- 🟥Move the monsters around regardless of player moving hero or not
+- 🟥Speed up their movement level by level
