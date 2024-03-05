@@ -15,7 +15,7 @@ the monsters holding the keys to the next level.
 - 🟩There are tiles that cannot be occupied by any character (hero or monster).
 - 🟩Every area contains 3-6 monsters.
 - 🟩The monsters levels come from the number of the area.
-  - 🟩If its the Xth area, the monsters have level X (with 50% chance) or level
+  - 🟩If it's the Xth area, the monsters have level X (with 50% chance) or level
     X+1 (40%) or level X+2 (10%).
 - 🟩One of the monsters is the boss.
 - 🟩One of the monsters (not the boss) is holding the key, so if it is killed the
@@ -39,7 +39,7 @@ the monsters holding the keys to the next level.
 - 🟩These values can change during the game.
 - 🟩When a character's health point is 0 or below, it is dead.
   - 🟩It disappears from the area.
-  - 🟩If its the hero, it is the end of the game.
+  - 🟩If it's the hero, it is the end of the game.
 
 #### 🟩Starting stats
 
@@ -70,7 +70,7 @@ the monsters holding the keys to the next level.
 
 #### 🟩Strike
 
-- 🟩On a strike a strike value (SV) is calculated from SP and a d6 doubled.
+- 🟩On a strike, a strike value (SV) is calculated from SP and a d6 doubled.
 - 🟩The strike is successful if 2 \* d6 + SP is higher than the other character's
   DP.
 - 🟩On a successful strike the other character's HP is decreased by the SV - the
