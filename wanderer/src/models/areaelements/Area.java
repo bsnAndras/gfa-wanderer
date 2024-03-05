@@ -74,6 +74,7 @@ public class Area {
     Enemy enemy;
     Random random = new Random();
     int enemyCount = random.nextInt(3, 7);
+    int hasKeyIndex = random.nextInt(1, enemyCount);
 
     do { //place the Boss somewhere on the board
       boss = new Boss(areaLevel + randomLevel(), randomCoord(), randomCoord());
@@ -84,8 +85,11 @@ public class Area {
     getTiles(areaLevel)[boss.getY()][boss.getX()].occupy(boss);
 
     for (int i = 1; i < enemyCount; i++) {
+      boolean hasKey;
       do { //place enemies somewhere on the board
-        enemy = new Enemy("Skeleton " + i, areaLevel + randomLevel(), randomCoord(), randomCoord());
+        hasKey = i == hasKeyIndex;
+        enemy = new Enemy("Skeleton " + i, areaLevel + randomLevel(), randomCoord(), randomCoord(),
+            hasKey);
       } while (getTiles(areaLevel)[enemy.getY()][enemy.getX()].isOccupied()
           || getTiles(areaLevel)[enemy.getY()][enemy.getX()] instanceof Wall);
       enemies.add(enemy);
