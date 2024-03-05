@@ -11,7 +11,7 @@ public class Hero extends MovingCharacter {
 
   public Hero(String name, int level, int x, int y) {
     //maxHP, sP, dP are set in the super constructor, but with this class' implementations
-    super(name, level, x, y,false);
+    super(name, level, x, y, false);
     setHealth(maxHealth);
     setDirection(Direction.DOWN);
   }
@@ -30,11 +30,12 @@ public class Hero extends MovingCharacter {
   protected void setInitialsP() {
     sP = 5 + MainController.diceRoll(6);
   }
-  public void levelUp(){
+
+  public void levelUp() {
     super.levelUp();
-    setMaxHealth(maxHealth+MainController.diceRoll(6));
-    setdP(dP+MainController.diceRoll(6));
-    setsP(sP+MainController.diceRoll(6));
+    setMaxHealth(maxHealth + MainController.diceRoll(6));
+    setdP(dP + MainController.diceRoll(6));
+    setsP(sP + MainController.diceRoll(6));
   }
 
   public Direction getDirection() {
@@ -43,6 +44,11 @@ public class Hero extends MovingCharacter {
 
   public void setDirection(Direction direction) {
     this.direction = direction;
+  }
+
+  public void setPosition(int x, int y, Direction direction) {
+    super.setPosition(x, y);
+    setDirection(direction);
   }
 
   public Battle moveUp(Tile toTile) {
