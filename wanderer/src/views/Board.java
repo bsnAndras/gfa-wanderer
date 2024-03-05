@@ -21,13 +21,17 @@ public class Board extends JComponent {
   private MovingCharacter defender;
   private List<Enemy> enemies;
   private Area area;
-
+  private int areaLevel;
   private final int tileSize;
 
   public Board() {
     tileSize = 72;
     setPreferredSize(new Dimension(tileSize * 10, tileSize * 10 + 40));
     setVisible(true);
+  }
+
+  public void setLevel(int level) {
+    areaLevel = level;
   }
 
   public void setHero(Hero hero) {
@@ -77,7 +81,7 @@ public class Board extends JComponent {
    * @param graphics
    */
   private void drawTiles(Graphics graphics) {
-    Tile[][] tiles = area.getTiles(1);
+    Tile[][] tiles = area.getTiles(areaLevel);
     for (int i = 0; i < tiles.length; i++) {
       for (int j = 0; j < tiles[0].length; j++) {
         String image = tiles[j][i] instanceof Floor ? "img/floor.png" : "img/wall.png";
