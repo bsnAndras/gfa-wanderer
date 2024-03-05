@@ -46,11 +46,32 @@ public class MainController implements KeyListener {
   public void goNextLevel(int level) {
     //reinitialize Area
     this.areaLevel = level;
+
+    //Hero level up
+    Random random = new Random();
+    int chance;
+    int newHealthPoints = hero.getHealth();
+
+    chance = random.nextInt(100);
+    if (chance < 10) {
+      newHealthPoints = hero.getMaxHealth();
+    } else if (chance < 40) {
+      newHealthPoints = hero.getHealth() + hero.getMaxHealth() / 3;
+    } else if (chance < 50){
+      newHealthPoints = hero.getHealth() + hero.getMaxHealth() / 10;
+    }
+    if (newHealthPoints <= hero.getMaxHealth()) {
+      hero.setHealth(newHealthPoints);
+    } else {
+      hero.setHealth(hero.getMaxHealth());
+    }
+
     //relocate Hero
     hero.setPosition(0, 0, Direction.DOWN);
     area.getTiles(areaLevel)[0][0].occupy(hero);
     hero.loseKey();
-    //sets up a random number of monsters based on hero's level
+
+    //sets up a random number of monsters based on areas level
     this.enemies = area.createEnemies(areaLevel);
     //gives the board:
     // The new level

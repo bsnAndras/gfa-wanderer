@@ -83,16 +83,16 @@ the monsters holding the keys to the next level.
 - 🟩His DP increases by d6.
 - 🟩His SP increases by d6.
 
-#### 🟥Entering next area
+#### 🟩Entering next area
 
 - 🟩When killing the monster who held the key to the next area, the hero enters
   immediately.
-  - 🟥Which is like the previous one just with new and higher level monsters.
-- 🟥When entering a new area the hero has:
-  - 🟥10% chance to restore all his HP.
-  - 🟥40% chance to restore the third of his HP.
-  - 🟥50% chance to restore 10% of his HP.
-- 🟥Monster Level X:
-  - 🟥HP: 2 \* X \* d6
-  - 🟥DP: X / 2 \* d6
-  - 🟥SP: X \* d6
+  - 🟩Which is like the previous one just with new and higher level monsters.
+- 🟩When entering a new area the hero has:
+  - 🟩10% chance to restore all his HP.
+  - 🟩40% chance to restore the third of his HP.
+  - 🟩50% chance to restore 10% of his HP.
+- 🟩Monster Level X:
+  - 🟩HP: 2 \* X \* d6
+  - 🟩DP: X / 2 \* d6
+  - 🟩SP: X \* d6
