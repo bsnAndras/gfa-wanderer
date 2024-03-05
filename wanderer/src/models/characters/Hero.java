@@ -11,7 +11,7 @@ public class Hero extends MovingCharacter {
 
   public Hero(String name, int level, int x, int y) {
     //maxHP, sP, dP are set in the super constructor, but with this class' implementations
-    super(name, level, x, y);
+    super(name, level, x, y,false);
     setHealth(maxHealth);
     setDirection(Direction.DOWN);
   }

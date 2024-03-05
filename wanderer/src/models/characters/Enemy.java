@@ -4,13 +4,11 @@ import controllers.MainController;
 import models.areaelements.Tile;
 
 public class Enemy extends MovingCharacter {
-  public final boolean hasKey;
 
   public Enemy(String name, int level, int x, int y, boolean hasKey) {
     //maxHP, sP, dP are set in the super constructor, but with this class' implementations
-    super(name, level, x, y);
+    super(name, level, x, y, hasKey);
     health = maxHealth;
-    this.hasKey=hasKey;
   }
 
   public void setInitialMaxHealth() {

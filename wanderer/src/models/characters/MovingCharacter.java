@@ -7,6 +7,7 @@ import models.areaelements.Wall;
 public abstract class MovingCharacter {
   public final String name;
   protected int level;
+  protected boolean hasKey;
   protected int maxHealth;
   protected int health;
   /**
@@ -23,9 +24,10 @@ public abstract class MovingCharacter {
   public boolean canMove;
   public boolean isUnderBattle;
 
-  public MovingCharacter(String name, int level, int x, int y) {
+  public MovingCharacter(String name, int level, int x, int y, boolean hasKey) {
     this.name = name;
     this.level = level;
+    this.hasKey = hasKey;
     this.x = x;
     this.y = y;
     canMove = true;
@@ -65,6 +67,18 @@ public abstract class MovingCharacter {
     this.sP = sP;
   }
 
+  public boolean hasKey() {
+    return hasKey;
+  }
+
+  public void giveKey() {
+    hasKey = true;
+  }
+
+  public void loseKey() {
+    hasKey = false;
+  }
+
   public int getLevel() {
     return level;
   }
@@ -72,8 +86,9 @@ public abstract class MovingCharacter {
   public void setLevel(int level) {
     this.level = level;
   }
-  public void levelUp(){
-    setLevel(level+1);
+
+  public void levelUp() {
+    setLevel(level + 1);
   }
 
   public int getMaxHealth() {
@@ -84,7 +99,8 @@ public abstract class MovingCharacter {
     return health;
   }
 
-  /** Sets the current health of the character
+  /**
+   * Sets the current health of the character
    *
    * @param health the new health points to set
    * @return if the character lives
@@ -103,7 +119,7 @@ public abstract class MovingCharacter {
 
   private void die() {
     currentTile.leave();
-    System.out.printf("%s died.\n",name);
+    System.out.printf("%s died.\n", name);
   }
 
   public int getdP() {
