@@ -11,17 +11,17 @@ public class Enemy extends MovingCharacter {
     health = maxHealth;
   }
 
-  public void setMaxHealth() {
+  public void setInitialMaxHealth() {
     maxHealth = level * 2 * MainController.diceRoll(6);
   }
 
   @Override
-  protected void setdP() {
+  protected void setInitialdP() {
     dP = level / 2 * MainController.diceRoll(6);
   }
 
   @Override
-  protected void setsP() {
+  protected void setInitialsP() {
     sP = level * MainController.diceRoll(6);
   }
 }

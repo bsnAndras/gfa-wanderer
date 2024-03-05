@@ -30,28 +30,40 @@ public abstract class MovingCharacter {
     this.y = y;
     canMove = true;
     isUnderBattle = false;
-    setMaxHealth();
-    setdP();
-    setsP();
+    setInitialMaxHealth();
+    setInitialdP();
+    setInitialsP();
   }
 
   /**
    * <p>For setting up the maxHealth in the beginning of the game</p>
    * <p>made abstract for use in subclasses</p>
    */
-  public abstract void setMaxHealth();
+  public abstract void setInitialMaxHealth();
 
   /**
    * <p>For setting up the dP (Defense Points) in the beginning of the game</p>
    * <p>made abstract for use in subclasses</p>
    */
-  protected abstract void setdP();
+  protected abstract void setInitialdP();
 
   /**
    * <p>For setting up the sP (Strike Points) in the beginning of the game</p>
    * <p>made abstract for use in subclasses</p>
    */
-  protected abstract void setsP();
+  protected abstract void setInitialsP();
+
+  public void setMaxHealth(int maxHealth) {
+    this.maxHealth = maxHealth;
+  }
+
+  public void setdP(int dP) {
+    this.dP = dP;
+  }
+
+  public void setsP(int sP) {
+    this.sP = sP;
+  }
 
   public int getLevel() {
     return level;
@@ -59,6 +71,9 @@ public abstract class MovingCharacter {
 
   public void setLevel(int level) {
     this.level = level;
+  }
+  public void levelUp(){
+    setLevel(level+1);
   }
 
   public int getMaxHealth() {

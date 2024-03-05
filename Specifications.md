@@ -7,7 +7,7 @@ the monsters holding the keys to the next level.
 
 ### 1. Go through the project specification
 
-#### The Game screen
+#### 🟥The Game screen
 
 - 🟩The screen contains the first area, which is 10 x 10 tiles where the hero (and
   the monsters) can move.
@@ -26,13 +26,13 @@ the monsters holding the keys to the next level.
   - 🟩If the hero is on the same tile with a monster, it shows all stats of the
     monster as well.
 
-#### Moving
+#### 🟩Moving
 
 - 🟩The hero can move tile-by-tile in four directions on the screen by using the
   corresponding arrows (or "WASD" if preferred).
 - 🟩After every two move, the monsters move one tile as well.
 
-#### The Characters
+#### 🟩The Characters
 
 - 🟩Every character has a (max and current) health point (HP), a defend (DP) and
   strike point (SP).
@@ -58,7 +58,7 @@ the monsters holding the keys to the next level.
   - DP: X/2 \* d6 + d6 / 2
   - SP: X \* d6 + X
 
-#### Battle
+#### 🟩Battle
 
 - 🟩When a hero enters a tile which is occupied by a monster, a battle forms.
 - 🟩The character entering the occupied tile is the attacker.
@@ -66,9 +66,9 @@ the monsters holding the keys to the next level.
   strikes back.
 - 🟩The attacker strikes on the defender, then the defender strikes and this
   continues until one of the characters dies.
-- 🟥After a won battle if the character is a hero, it levels up.
+- 🟩After a won battle if the character is a hero, it levels up.
 
-#### Strike
+#### 🟩Strike
 
 - 🟩On a strike a strike value (SV) is calculated from SP and a d6 doubled.
 - 🟩The strike is successful if 2 \* d6 + SP is higher than the other character's
@@ -76,14 +76,14 @@ the monsters holding the keys to the next level.
 - 🟩On a successful strike the other character's HP is decreased by the SV - the
   other character's DP.
 
-#### Leveling
+#### 🟩Leveling
 
-- 🟥After successfully won battle the character is leveling up.
-- 🟥His max HP increases by d6.
-- 🟥His DP increases by d6.
-- 🟥His SP increases by d6.
+- 🟩After successfully won battle the character is leveling up.
+- 🟩His max HP increases by d6.
+- 🟩His DP increases by d6.
+- 🟩His SP increases by d6.
 
-#### Entering next area
+#### 🟥Entering next area
 
 - 🟥When killing the monster who held the key to the next area, the hero enters
   immediately.

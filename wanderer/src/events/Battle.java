@@ -45,6 +45,7 @@ public class Battle {
     if (sV > dP) {
       if (!defender.setHealth(defender.getHealth() - (sV - dP))) {
         kill(defender);
+        striker.levelUp();
         striker.isUnderBattle = false;
         return striker;
       }
