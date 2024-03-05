@@ -44,9 +44,14 @@ public class Battle {
     int dP = defender.getdP();
     if (sV > dP) {
       if (!defender.setHealth(defender.getHealth() - (sV - dP))) {
+        if(defender.hasKey()){
+          defender.loseKey();
+          striker.giveKey();
+        }
         kill(defender);
         striker.levelUp();
         striker.isUnderBattle = false;
+
         return striker;
       }
     } else {

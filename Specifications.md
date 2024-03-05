@@ -7,7 +7,7 @@ the monsters holding the keys to the next level.
 
 ### 1. Go through the project specification
 
-#### 🟥The Game screen
+#### 🟩The Game screen
 
 - 🟩The screen contains the first area, which is 10 x 10 tiles where the hero (and
   the monsters) can move.
@@ -18,7 +18,7 @@ the monsters holding the keys to the next level.
   - 🟩If its the Xth area, the monsters have level X (with 50% chance) or level
     X+1 (40%) or level X+2 (10%).
 - 🟩One of the monsters is the boss.
-- 🟥One of the monsters (not the boss) is holding the key, so if it is killed the
+- 🟩One of the monsters (not the boss) is holding the key, so if it is killed the
   hero goes to the next area, but also the boss has to be killed.
 - 🟩The game screen also contains a text area where info of the characters' are
   provided.
@@ -85,7 +85,7 @@ the monsters holding the keys to the next level.
 
 #### 🟥Entering next area
 
-- 🟥When killing the monster who held the key to the next area, the hero enters
+- 🟩When killing the monster who held the key to the next area, the hero enters
   immediately.
   - 🟥Which is like the previous one just with new and higher level monsters.
 - 🟥When entering a new area the hero has:

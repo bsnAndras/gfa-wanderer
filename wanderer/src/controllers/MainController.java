@@ -5,6 +5,7 @@ import events.MonstersMovingEvent;
 import java.util.ArrayList;
 import java.util.Random;
 import models.Area;
+import models.Direction;
 import models.Hero;
 import models.areaelements.Tile;
 import models.characters.Enemy;
@@ -36,9 +37,28 @@ public class MainController implements KeyListener {
     //loads the board and give it the hero, the monsters
     // and the tiles(area) to draw
     this.board = board;
+    board.setLevel(areaLevel);
     board.setHero(hero);
     board.setEnemies(enemies);
     board.setArea(area);
+  }
+
+  public void goNextLevel(int level) {
+    //reinitialize Area
+    this.areaLevel = level;
+    //relocate Hero
+    hero.setPosition(0, 0, Direction.DOWN);
+    area.getTiles(areaLevel)[0][0].occupy(hero);
+    hero.loseKey();
+    //sets up a random number of monsters based on hero's level
+    this.enemies = area.createEnemies(areaLevel);
+    //gives the board:
+    // The new level
+    // The hero
+    // The new monsters
+    board.setLevel(areaLevel);
+    board.setHero(hero);
+    board.setEnemies(enemies);
   }
 
   /**
@@ -138,6 +158,9 @@ public class MainController implements KeyListener {
         if (battle.fight() != null) {
           board.setDefender(null);
           board.setOpponent(null);
+          if (hero.hasKey()) {
+            goNextLevel(areaLevel + 1);
+          }
         }
       }
     }
