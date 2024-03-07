@@ -1,6 +1,7 @@
 package models.characters;
 
 import events.Battle;
+import models.Direction;
 import models.areaelements.Tile;
 import models.areaelements.Wall;
 
@@ -169,6 +170,45 @@ public abstract class MovingCharacter {
   }
 
   /**
+   * <p>Move the character 1 tile in the given direction if viable</p>
+   * <ul>
+   *   <li>Checks if the character is currently under a battle,</li>
+   *   <li>then checks for obstacles in the given direction and moves accordingly</li>
+   *   <li>If Enemy is found, initiates a battle</li>
+   * </ul>
+   *
+   * @param direction The given direction of movement
+   * @param toTile The Tile, where the character tries to move
+   * @return a Battle, if a battle began after the move
+   */
+  public Battle move(Direction direction, Tile toTile) {
+    int obstacle;
+    if (!isUnderBattle) {
+      if (toTile == null) { //in case of invalid index
+        obstacle = 1;
+      } else {
+        obstacle = detectObstacle(toTile);
+      }
+      if (obstacle == 0) {
+        switch (direction){
+          case UP -> y--;
+          case RIGHT -> x++;
+          case DOWN -> y++;
+          case LEFT -> x--;
+        }
+        currentTile.leave();
+        toTile.occupy(this);
+      } else {
+        if (obstacle < 0) {
+          isUnderBattle = true;
+          return new Battle(this, toTile.getCharacter());
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
    * Move the character 1 tile upwards, if it can
    *
    * @return a Battle, if a battle began after the move
@@ -282,7 +322,7 @@ public abstract class MovingCharacter {
    * @param tile the Tile what we want to check if it is an obstacle
    * @return <ul>
    * <li>0 if free to go</li>
-   * <li>1 if Wall found</li>
+   * <li>1 if cannot go (e.g. Wall found)</li>
    * <li>-1 if Enemy found</li>
    * </ul>
    */
