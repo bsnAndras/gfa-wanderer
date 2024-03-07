@@ -2,6 +2,7 @@ package models.characters;
 
 import controllers.MainController;
 import models.areaelements.Tile;
+import models.areaelements.Wall;
 
 public class Enemy extends MovingCharacter {
 
@@ -23,5 +24,18 @@ public class Enemy extends MovingCharacter {
   @Override
   protected void setInitialsP() {
     sP = level * MainController.diceRoll(6);
+  }
+
+  public int detectObstacle(Tile tile) {
+    if (tile instanceof Wall ||
+        tile.getCharacter() instanceof Enemy) {
+      //if wall or friendly character -> 1
+      return 1;
+    } else if (tile.isOccupied()) {
+      //if enemy found -> -1
+      return -1;
+    } else {
+      return 0;
+    }
   }
 }
