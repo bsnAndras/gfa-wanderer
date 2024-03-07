@@ -172,25 +172,25 @@ public abstract class MovingCharacter {
   /**
    * <p>Move the character 1 tile in the given direction if viable</p>
    * <ul>
-   *   <li>Checks if the character is currently under a battle,</li>
+   *   <li>Checks if the character is currently under a battle, and got a valid direction</li>
    *   <li>then checks for obstacles in the given direction and moves accordingly</li>
    *   <li>If Enemy is found, initiates a battle</li>
    * </ul>
    *
    * @param direction The given direction of movement
-   * @param toTile The Tile, where the character tries to move
+   * @param toTile    The Tile, where the character tries to move
    * @return a Battle, if a battle began after the move
    */
   public Battle move(Direction direction, Tile toTile) {
     int obstacle;
-    if (!isUnderBattle) {
+    if (!isUnderBattle && direction != null) {
       if (toTile == null) { //in case of invalid index
         obstacle = 1;
       } else {
         obstacle = detectObstacle(toTile);
       }
       if (obstacle == 0) {
-        switch (direction){
+        switch (direction) {
           case UP -> y--;
           case RIGHT -> x++;
           case DOWN -> y++;
@@ -209,111 +209,26 @@ public abstract class MovingCharacter {
   }
 
   /**
-   * Move the character 1 tile upwards, if it can
+   * A method for checking whether a Tile can be accessed and if it contains Enemy or not
    *
-   * @return a Battle, if a battle began after the move
+   * @param tileMap an array that contain that particular Tile
+   * @param x       The X coordinate of the Tile
+   * @param y       The Y coordinate of the Tile
+   * @return <ul>
+   * <li>0 if free to go</li>
+   * <li>1 if cannot go (e.g. Wall found)</li>
+   * <li>-1 if Enemy found</li>
+   * </ul>
    */
-  public Battle moveUp(Tile toTile) {
-    int obstacle;
-    if (!isUnderBattle) {
-      if (currentTile == toTile) {
-        obstacle = 1;
-      } else {
-        obstacle = detectObstacle(toTile);
-      }
-      if (obstacle == 0) {
-        y--;
-        currentTile.leave();
-        toTile.occupy(this);
-      } else {
-        if (obstacle < 0) {
-          isUnderBattle = true;
-          return new Battle(this, toTile.getCharacter());
-        }
-      }
-    }
-    return null;
-  }
 
-  /**
-   * Move the character 1 tile downwards, if it can
-   *
-   * @return a Battle, if a battle began after the move
-   */
-  public Battle moveDown(Tile toTile) {
-    int obstacle;
-    if (!isUnderBattle) {
-      if (currentTile == toTile) {
-        obstacle = 1;
-      } else {
-        obstacle = detectObstacle(toTile);
-      }
-      if (obstacle == 0) {
-        y++;
-        currentTile.leave();
-        toTile.occupy(this);
-      } else {
-        if (obstacle < 0) {
-          isUnderBattle = true;
-          return new Battle(this, toTile.getCharacter());
-        }
-      }
+  public int detectObstacle(Tile[][] tileMap, int x, int y) {
+    Tile tile;
+    try {
+       tile = tileMap[y][x];
+    } catch (IndexOutOfBoundsException e) {
+      return 1;
     }
-    return null;
-  }
-
-  /**
-   * Move the character 1 tile left, if it can
-   *
-   * @return a Battle, if a battle began after the move
-   */
-  public Battle moveLeft(Tile toTile) {
-    int obstacle;
-    if (!isUnderBattle) {
-      if (currentTile == toTile) {
-        obstacle = 1;
-      } else {
-        obstacle = detectObstacle(toTile);
-      }
-      if (obstacle == 0) {
-        x--;
-        currentTile.leave();
-        toTile.occupy(this);
-      } else {
-        if (obstacle < 0) {
-          isUnderBattle = true;
-          return new Battle(this, toTile.getCharacter());
-        }
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Move the character 1 tile right, if it can
-   *
-   * @return a Battle, if a battle began after the move
-   */
-  public Battle moveRight(Tile toTile) {
-    int obstacle;
-    if (!isUnderBattle) {
-      if (currentTile == toTile) {
-        obstacle = 1;
-      } else {
-        obstacle = detectObstacle(toTile);
-      }
-      if (obstacle == 0) {
-        x++;
-        currentTile.leave();
-        toTile.occupy(this);
-      } else {
-        if (obstacle < 0) {
-          isUnderBattle = true;
-          return new Battle(this, toTile.getCharacter());
-        }
-      }
-    }
-    return null;
+    return detectObstacle(tile);
   }
 
   /**

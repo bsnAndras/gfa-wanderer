@@ -31,7 +31,7 @@ the monsters holding the keys to the next level.
 - 🟩The hero can move tile-by-tile in four directions on the screen by using the
   corresponding arrows (or "WASD" if preferred).
 - 🟩After every two move, the monsters move one tile as well.
-- 🟥(debug) some monsters don't move at certain situations
+- 🟩(debug) some monsters don't move at certain situations
 
 #### 🟩The Characters
 
@@ -62,7 +62,7 @@ the monsters holding the keys to the next level.
 #### 🟩Battle
 
 - 🟩When a hero enters a tile which is occupied by a monster, a battle forms.
-- 🟥(debug) When a monster meets another monster, no battle occurs.
+- 🟩(debug) When a monster meets another monster, no battle occurs.
 - 🟩The character entering the occupied tile is the attacker.
 - 🟩When the player hits `space` his hero strikes on the defender and then it
   strikes back.
