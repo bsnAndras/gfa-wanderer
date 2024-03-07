@@ -57,7 +57,7 @@ public class MainController implements KeyListener {
       newHealthPoints = hero.getMaxHealth();
     } else if (chance < 40) {
       newHealthPoints = hero.getHealth() + hero.getMaxHealth() / 3;
-    } else if (chance < 50){
+    } else if (chance < 50) {
       newHealthPoints = hero.getHealth() + hero.getMaxHealth() / 10;
     }
     if (newHealthPoints <= hero.getMaxHealth()) {
@@ -67,8 +67,8 @@ public class MainController implements KeyListener {
     }
 
     //relocate Hero
-    hero.setPosition(0, 0, Direction.DOWN);
     area.getTiles(areaLevel)[0][0].occupy(hero);
+    hero.setPosition(0, 0, Direction.DOWN);
     hero.loseKey();
 
     //sets up a random number of monsters based on areas level
@@ -118,7 +118,7 @@ public class MainController implements KeyListener {
         } catch (IndexOutOfBoundsException ex) {
           toTile = null;
         }
-        battle = hero.move(Direction.UP,toTile);
+        battle = hero.move(Direction.UP, toTile);
 
       } else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyChar() == 's') {
 
@@ -128,7 +128,7 @@ public class MainController implements KeyListener {
           toTile = null;
         }
 
-        battle = hero.move(Direction.DOWN,toTile);
+        battle = hero.move(Direction.DOWN, toTile);
 
       } else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyChar() == 'a') {
 
@@ -138,7 +138,7 @@ public class MainController implements KeyListener {
           toTile = null;
         }
 
-        battle = hero.move(Direction.LEFT,toTile);
+        battle = hero.move(Direction.LEFT, toTile);
 
       } else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyChar() == 'd') {
 
@@ -148,7 +148,7 @@ public class MainController implements KeyListener {
           toTile = null;
         }
 
-        battle = hero.move(Direction.RIGHT,toTile);
+        battle = hero.move(Direction.RIGHT, toTile);
       }
       movementCounter++;
 
@@ -179,8 +179,16 @@ public class MainController implements KeyListener {
         if (battle.fight() != null) {
           board.setDefender(null);
           board.setOpponent(null);
+          if(hero.getHealth()<=0){
+            board.endGame = true;
+          }
           if (hero.hasKey()) {
-            goNextLevel(areaLevel + 1);
+            try {
+              goNextLevel(areaLevel + 1);
+            } catch (IndexOutOfBoundsException ex) {
+              areaLevel--;
+              board.endGame = true;
+            }
           }
         }
       }

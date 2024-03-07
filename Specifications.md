@@ -90,7 +90,7 @@ the monsters holding the keys to the next level.
 - 🟩When killing the monster who held the key to the next area, the hero enters
   immediately.
   - 🟩Which is like the previous one just with new and higher level monsters.
-  - 🟥After the last level, the game prints out the end stats.
+  - 🟩After the last level, the game prints out the end stats.
 - 🟩When entering a new area the hero has:
   - 🟩10% chance to restore all his HP.
   - 🟩40% chance to restore the third of his HP.

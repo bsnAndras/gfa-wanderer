@@ -24,6 +24,7 @@ public abstract class MovingCharacter {
   private Tile currentTile;
   public boolean canMove;
   public boolean isUnderBattle;
+  public int enemiesKilled;
 
   public MovingCharacter(String name, int level, int x, int y, boolean hasKey) {
     this.name = name;

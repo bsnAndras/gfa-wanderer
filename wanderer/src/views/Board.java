@@ -15,7 +15,7 @@ import models.characters.Enemy;
 import models.characters.MovingCharacter;
 
 public class Board extends JComponent {
-
+  public boolean endGame;
   private Hero hero;
   private Enemy opponent;
   private MovingCharacter defender;
@@ -25,6 +25,7 @@ public class Board extends JComponent {
   private final int tileSize;
 
   public Board() {
+    endGame = false;
     tileSize = 72;
     setPreferredSize(new Dimension(tileSize * 10, tileSize * 10 + 40));
     setVisible(true);
@@ -66,10 +67,10 @@ public class Board extends JComponent {
     drawTiles(graphics);
     drawEnemy(graphics);
     drawStatistics(graphics);
-    if (hero.getHealth() > 0) {
-      drawHero(graphics);
-    } else {
+    if (endGame) {
       drawEndGame(graphics);
+    } else {
+      drawHero(graphics);
     }
   }
 
@@ -171,7 +172,15 @@ public class Board extends JComponent {
   }
 
   public void drawEndGame(Graphics graphics) {
-    String gameOver = "GAME OVER!";
+    String gameOver;
+    String stats = "";
+    if (hero.getHealth() <= 0) {
+      gameOver = "GAME OVER!";
+    } else {
+      gameOver = "--- THE END ---\n";
+      stats = String.format("Enemies killed: %s\n",
+          hero.enemiesKilled);
+    }
     //background tinted - dark grey with opacity
     graphics.setColor(new Color(0, 0, 0, 180));
     graphics.fillRect(0, 0, 720, 760);
@@ -182,5 +191,7 @@ public class Board extends JComponent {
     graphics.setColor(new Color(232, 232, 232));
     graphics.setFont(new Font("Arial", Font.BOLD, 60));
     graphics.drawString(gameOver, 160, 350);
+    graphics.setFont(new Font("Arial", Font.ITALIC, 20));
+    graphics.drawString(stats, 160, 450);
   }
 }
