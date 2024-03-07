@@ -51,23 +51,9 @@ public class Hero extends MovingCharacter {
     setDirection(direction);
   }
 
-  public Battle moveUp(Tile toTile) {
-    direction = Direction.UP;
-    return super.moveUp(toTile);
-  }
-
-  public Battle moveDown(Tile toTile) {
-    direction = Direction.DOWN;
-    return super.moveDown(toTile);
-  }
-
-  public Battle moveLeft(Tile toTile) {
-    direction = Direction.LEFT;
-    return super.moveLeft(toTile);
-  }
-
-  public Battle moveRight(Tile toTile) {
-    direction = Direction.RIGHT;
-    return super.moveRight(toTile);
+  @Override
+  public Battle move(Direction direction, Tile toTile) {
+    this.direction=direction;
+    return super.move(direction, toTile);
   }
 }

@@ -116,39 +116,39 @@ public class MainController implements KeyListener {
         try {
           toTile = area.getTiles(areaLevel)[hero.getY() - 1][hero.getX()];
         } catch (IndexOutOfBoundsException ex) {
-          toTile = fromTile;
+          toTile = null;
         }
-        battle = hero.moveUp(toTile);
+        battle = hero.move(Direction.UP,toTile);
 
       } else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyChar() == 's') {
 
         try {
           toTile = area.getTiles(areaLevel)[hero.getY() + 1][hero.getX()];
         } catch (IndexOutOfBoundsException ex) {
-          toTile = fromTile;
+          toTile = null;
         }
 
-        battle = hero.moveDown(toTile);
+        battle = hero.move(Direction.DOWN,toTile);
 
       } else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyChar() == 'a') {
 
         try {
           toTile = area.getTiles(areaLevel)[hero.getY()][hero.getX() - 1];
         } catch (IndexOutOfBoundsException ex) {
-          toTile = fromTile;
+          toTile = null;
         }
 
-        battle = hero.moveLeft(toTile);
+        battle = hero.move(Direction.LEFT,toTile);
 
       } else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyChar() == 'd') {
 
         try {
           toTile = area.getTiles(areaLevel)[hero.getY()][hero.getX() + 1];
         } catch (IndexOutOfBoundsException ex) {
-          toTile = fromTile;
+          toTile = null;
         }
 
-        battle = hero.moveRight(toTile);
+        battle = hero.move(Direction.RIGHT,toTile);
       }
       movementCounter++;
 
