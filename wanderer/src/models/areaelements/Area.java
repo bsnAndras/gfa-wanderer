@@ -1,12 +1,8 @@
-package models;
+package models.areaelements;
 
 import java.util.Random;
-import models.areaelements.Floor;
-import models.areaelements.Tile;
-import models.areaelements.Wall;
 import models.characters.Boss;
 import models.characters.Enemy;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +75,7 @@ public class Area {
     tiles.add(generateTileMap(thirdTiles));
   }
 
-  @NotNull
+
   private static Tile[][] generateTileMap(int[][] intTiles) {
     Tile[][] tileMap = new Tile[intTiles.length][intTiles.length];
     for (int i = 0; i < intTiles.length; i++) {

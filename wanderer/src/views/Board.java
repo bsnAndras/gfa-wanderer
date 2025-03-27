@@ -2,7 +2,7 @@ package views;
 
 import java.util.List;
 import javax.swing.border.Border;
-import models.Area;
+import models.areaelements.Area;
 import models.Direction;
 import models.Hero;
 import models.areaelements.Floor;

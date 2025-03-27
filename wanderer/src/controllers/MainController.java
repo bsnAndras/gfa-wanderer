@@ -4,7 +4,7 @@ import events.Battle;
 import events.MonstersMovingEvent;
 import java.util.ArrayList;
 import java.util.Random;
-import models.Area;
+import models.areaelements.Area;
 import models.Direction;
 import models.Hero;
 import models.areaelements.Tile;
