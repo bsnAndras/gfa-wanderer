@@ -1,10 +1,8 @@
 package views;
 
 import java.util.List;
-import javax.swing.border.Border;
 import models.areaelements.Area;
 import models.Direction;
-import models.Hero;
 import models.areaelements.Floor;
 import models.areaelements.Tile;
 
@@ -12,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import models.characters.Boss;
 import models.characters.Enemy;
+import models.characters.Hero;
 import models.characters.MovingCharacter;
 
 public class Board extends JComponent {
@@ -78,8 +77,6 @@ public class Board extends JComponent {
    * <p>Draws the Tiles based on the map set up in the Area class</p>
    * <p>This method iterates through the whole Area and loads the image for every Tile
    * based upon its Class type (Floor or Wall)</p>
-   *
-   * @param graphics
    */
   private void drawTiles(Graphics graphics) {
     Tile[][] tiles = area.getTiles(areaLevel);
@@ -106,8 +103,6 @@ public class Board extends JComponent {
   /**
    * <p>Draws the hero on the board</p>
    * <p>The image related to every direction is loaded here</p>
-   *
-   * @param graphics
    */
   private void drawHero(Graphics graphics) {
     String heroImagePath = "";
@@ -129,8 +124,6 @@ public class Board extends JComponent {
   /**
    * <p>Draws enemies on the board using the coordinates stored in the enemy classes</p>
    * <p>The pictures of the enemies are loaded here</p>
-   *
-   * @param graphics
    */
   private void drawEnemy(Graphics graphics) {
     String imagePath;

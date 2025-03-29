@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import models.areaelements.Area;
 import models.Direction;
-import models.Hero;
 import models.areaelements.Tile;
 import models.characters.Enemy;
+import models.characters.Hero;
 import views.Board;
 
 import java.awt.event.KeyEvent;

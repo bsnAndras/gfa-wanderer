@@ -2,9 +2,8 @@ package events;
 
 import controllers.MainController;
 import java.util.ArrayList;
-import models.Hero;
-import models.areaelements.Tile;
 import models.characters.Enemy;
+import models.characters.Hero;
 import models.characters.MovingCharacter;
 
 public class Battle {

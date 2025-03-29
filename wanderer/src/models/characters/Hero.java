@@ -1,9 +1,9 @@
-package models;
+package models.characters;
 
 import controllers.MainController;
 import events.Battle;
+import models.Direction;
 import models.areaelements.Tile;
-import models.characters.MovingCharacter;
 
 public class Hero extends MovingCharacter {
 
